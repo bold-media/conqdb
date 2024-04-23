@@ -5,7 +5,13 @@ const withNextIntl = createNextIntlPlugin()
 
 const policies = {
   'default-src': ["'self'"],
-  'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+  'script-src': [
+    "'self'",
+    "'unsafe-inline'",
+    "'unsafe-eval'",
+    'https://cdn.jsdeliver.net',
+    'https://cdn.conqdb.com',
+  ],
   'child-src': ["'self'"],
   'style-src': [
     "'self'",
@@ -13,7 +19,7 @@ const policies = {
     'https://fonts.googleapis.com',
     'https://cdn.conqdb.com',
   ],
-  'img-src': ["'self'", 'https://cdn.discordapp.com'],
+  'img-src': ["'self'", 'https://cdn.discordapp.com', 'https://cdn.conqdb.com'],
   'font-src': ["'self'", 'https://cdn.conqdb.com'],
   'frame-src': ["'self'"],
   'connect-src': ["'self'"],
