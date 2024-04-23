@@ -13,7 +13,7 @@ const nextConfig = {
       },
     ],
   },
-  assetPrefix: process.env.NODE_ENV === 'production' ? process.env.CDN_URL : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_CDN_URL : '',
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
