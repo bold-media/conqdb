@@ -5,13 +5,7 @@ const withNextIntl = createNextIntlPlugin()
 
 const policies = {
   'default-src': ["'self'"],
-  'script-src': [
-    "'self'",
-    "'unsafe-inline'",
-    "'unsafe-eval'",
-    'https://cdn.jsdeliver.net',
-    'https://cdn.conqdb.com',
-  ],
+  'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'", 'https://cdn.conqdb.com'],
   'child-src': ["'self'"],
   'style-src': [
     "'self'",
@@ -19,7 +13,12 @@ const policies = {
     'https://fonts.googleapis.com',
     'https://cdn.conqdb.com',
   ],
-  'img-src': ["'self'", 'https://cdn.discordapp.com', 'https://cdn.conqdb.com'],
+  'img-src': [
+    "'self'",
+    'https://cdn.discordapp.com',
+    'https://cdn.conqdb.com',
+    'https://cdn.jsdelivr.net/',
+  ],
   'font-src': ["'self'", 'https://cdn.conqdb.com'],
   'frame-src': ["'self'"],
   'connect-src': ["'self'"],
@@ -70,6 +69,24 @@ const nextConfig = {
           },
         ],
         source: '/:path*',
+      })
+
+      headers.push({
+        source: '/_next/static/*',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: process.env.NEXT_PUBLIC_APP_URL,
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET, OPTIONS',
+          },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: 'Content-Type',
+          },
+        ],
       })
     }
 
