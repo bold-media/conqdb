@@ -14,7 +14,7 @@ const policies = {
   'connect-src': ["'self'"],
 }
 
-module.exports = Object.entries(policies)
+export const ContentSecurityPolicy = Object.entries(policies)
   .map(([key, value]) => {
     if (Array.isArray(value)) {
       return `${key} ${value.join(' ')}`
