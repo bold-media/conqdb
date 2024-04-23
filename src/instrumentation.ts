@@ -1,16 +1,20 @@
-import { getPayload } from './lib/payload'
+/**
+ * This is not working yet, due to a bug in Payload 3.0
+ */
 
-export const register = async () => {
-  if (process.env.NODE_ENV === 'production') {
-    const payload = await getPayload()
-    try {
-      payload.logger.info('Running migrations...')
+// import { getPayload } from './lib/payload'
 
-      await payload.db.migrate()
+// export const register = async () => {
+//   if (process.env.NODE_ENV === 'production') {
+//     const payload = await getPayload()
+//     try {
+//       payload.logger.info('Running migrations...')
 
-      payload.logger.info('Migrations complete.')
-    } catch (error) {
-      payload.logger.info('Migrations failed.')
-    }
-  }
-}
+//       await payload.db.migrate()
+
+//       payload.logger.info('Migrations complete.')
+//     } catch (error) {
+//       payload.logger.info('Migrations failed.')
+//     }
+//   }
+// }
