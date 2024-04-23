@@ -3,7 +3,7 @@ import createNextIntlPlugin from 'next-intl/plugin'
 
 const withNextIntl = createNextIntlPlugin()
 
-import { ContentSecurityPolicy } from './csp'
+import { ContentSecurityPolicy } from './csp.ts'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
