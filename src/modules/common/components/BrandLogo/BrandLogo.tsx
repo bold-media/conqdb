@@ -7,6 +7,7 @@ import DarkModeLogo from 'public/conqdb-logo-landscape-darkmode.svg'
 
 interface BrandLogoProps extends BoxProps {}
 
+/* eslint-disable react/display-name */
 export const BrandLogo = createPolymorphicComponent<'div', BrandLogoProps>(
   forwardRef<HTMLDivElement, BrandLogoProps>(({ ...rest }, ref) => (
     <Box {...rest} ref={ref}>
@@ -19,3 +20,5 @@ export const BrandLogo = createPolymorphicComponent<'div', BrandLogoProps>(
     </Box>
   )),
 )
+
+BrandLogo.displayName = 'BrandLogo'

@@ -10,6 +10,7 @@ interface DiscordButtonProps extends ButtonProps {
   children?: React.ReactNode
 }
 
+/* eslint-disable react/display-name */
 export const DiscordButton = createPolymorphicComponent<'button', DiscordButtonProps>(
   forwardRef<HTMLButtonElement, DiscordButtonProps>(
     ({ children, className, size = 'sm', ...rest }, ref) => (
@@ -43,3 +44,5 @@ export const DiscordButton = createPolymorphicComponent<'button', DiscordButtonP
     ),
   ),
 )
+
+DiscordButton.displayName = 'DiscordButton'
