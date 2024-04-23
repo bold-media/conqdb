@@ -20,25 +20,25 @@ export const ComingSoon = () => {
       <Box className={classes.overlay}>
         <Container h="100%">
           <Stack align="center" justify="center" h="100%">
-            <Title fw={400}>Coming Soon</Title>
+            <Title fw={600}>Coming Soon</Title>
             <Container size="xs">
-              <Text ta="center">
+              <Text ta="center" fw={500}>
                 This site will be an alternative to{' '}
                 <Anchor href="https://conqhub.com/" target="_blank" rel="noreferrer">
                   conqhub
                 </Anchor>{' '}
                 and provide many more features that make managing raids and territory wars easier.
               </Text>
-              <Text ta="center" size="sm" mt="sm" c="dimmed">
-                If you'd like updates, to help with maintaing the site, or translations, please join
-                our Discord.
+              <Text ta="center" size="sm" mt="xl" mb="md" fw={500} c="dimmed">
+                Become part of our community for updates, or if you'd like to help with maintaing
+                the site.
               </Text>
             </Container>
             <DiscordButton
               component={Link}
               href="https://discord.gg/6TbZVddQNy"
               target="_blank"
-              size="sm"
+              size="md"
             >
               Join our Discord
             </DiscordButton>
