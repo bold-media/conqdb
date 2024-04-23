@@ -53,9 +53,6 @@ const nextConfig = {
     return config
   },
   output: 'standalone',
-  experimental: {
-    instrumentationHook: true,
-  },
 
   async headers() {
     const headers = []
