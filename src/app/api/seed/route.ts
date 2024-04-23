@@ -3,7 +3,13 @@ import { NextRequest } from 'next/server'
 
 export const GET = async (req: NextRequest): Promise<Response> => {
   try {
+    const password = req.nextUrl.searchParams.get('password')
+
     if (process.env.NODE_ENV !== 'production') {
+      await seed()
+
+      return new Response('Seeded successfully', { status: 200 })
+    } else if (password === process.env.NEXT_PRIVATE_SEED_PASSWORD) {
       await seed()
 
       return new Response('Seeded successfully', { status: 200 })
