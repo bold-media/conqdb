@@ -18,8 +18,16 @@ export const PayloadPluginCloudStorage = cloudStorage({
   collections: {
     [COLLECTION_SLUG_MEDIA]: {
       adapter,
-      prefix: COLLECTION_SLUG_MEDIA,
-      generateFileURL: ({ filename }) => `https://assets.conqdb.com/media/${filename}`,
+      prefix:
+        process.env.NODE_ENV === 'production'
+          ? COLLECTION_SLUG_MEDIA
+          : `${COLLECTION_SLUG_MEDIA}-staging`,
+      generateFileURL: ({ filename }) =>
+        `https://assets.conqdb.com/${
+          process.env.NODE_ENV === 'production'
+            ? COLLECTION_SLUG_MEDIA
+            : `${COLLECTION_SLUG_MEDIA}-staging`
+        }/${filename}`,
     },
   },
 })
