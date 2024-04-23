@@ -8,62 +8,40 @@
 
 export interface Config {
   collections: {
-    pages: Page;
+    user: User;
+    profile: Profile;
     media: Media;
-    users: User;
+    page: Page;
+    'profile-unit': ProfileUnit;
+    unit: Unit;
+    'unit-tag': UnitTag;
+    'unit-type': UnitType;
+    'unit-category': UnitCategory;
+    'unit-era': UnitEra;
+    weapon: Weapon;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
   globals: {};
+  locale: 'ar' | 'cz' | 'de' | 'en' | 'pl' | 'ru' | 'tr';
+  user: User & {
+    collection: 'user';
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages".
- */
-export interface Page {
-  id: string;
-  title?: string | null;
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: string;
-  text?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
+ * via the `definition` "user".
  */
 export interface User {
-  id: string;
+  id: number;
+  roles?: ('banned' | 'user' | 'member' | 'maintainer' | 'admin')[] | null;
+  profile?: (number | null) | Profile;
+  discordId?: string | null;
+  discordUsername?: string | null;
+  discordDiscriminator?: string | null;
+  discordAccessToken?: string | null;
+  discordRefreshToken?: string | null;
+  discordAvatar?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -77,13 +55,223 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "profile".
+ */
+export interface Profile {
+  id: number;
+  username?: string | null;
+  level?: number | null;
+  lightLeadership?: number | null;
+  mediumLeadership?: number | null;
+  heavyLeadership?: number | null;
+  weapons?:
+    | {
+        leadership?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  alt?: string | null;
+  blurDataURL?: string | null;
+  prefix?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  sizes?: {
+    blur?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page".
+ */
+export interface Page {
+  id: number;
+  title?: string | null;
+  fullTitle?: string | null;
+  slug?: string | null;
+  pathname?: string | null;
+  parent?: (number | null) | Page;
+  breadcrumbs?:
+    | {
+        doc?: (number | null) | Page;
+        url?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "profile-unit".
+ */
+export interface ProfileUnit {
+  id: number;
+  profile: number | Profile;
+  unit: number | Unit;
+  level: number;
+  status: 'training' | 'ready' | 'maxed';
+  unlockedMasteryNodes?: number | null;
+  favorite?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "unit".
+ */
+export interface Unit {
+  id: number;
+  name: string;
+  tags?: (number | UnitTag)[] | null;
+  leadership: number;
+  stars: number;
+  maxLevel: number;
+  type: number | UnitType;
+  category: number | UnitCategory;
+  era: number | UnitEra;
+  mastery: {
+    hasMastery?: boolean | null;
+    nodes?:
+      | {
+          title?: string | null;
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  attributes: {
+    health?: number | null;
+    strength?: number | null;
+    speed?: number | null;
+    range?: number | null;
+    ammo?: number | null;
+    labour?: number | null;
+    piercingArmourPenetration?: number | null;
+    slashingArmourPenetration?: number | null;
+    bluntArmourPenetration?: number | null;
+    piercingDamage?: number | null;
+    slashingDamage?: number | null;
+    bluntDamage?: number | null;
+    piercingDefence?: number | null;
+    slashingDefence?: number | null;
+    bluntDefence?: number | null;
+  };
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "unit-tag".
+ */
+export interface UnitTag {
+  id: number;
+  name?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "unit-type".
+ */
+export interface UnitType {
+  id: number;
+  name?: string | null;
+  weight?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "unit-category".
+ */
+export interface UnitCategory {
+  id: number;
+  name?: string | null;
+  weight?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "unit-era".
+ */
+export interface UnitEra {
+  id: number;
+  name?: string | null;
+  weight?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "weapon".
+ */
+export interface Weapon {
+  id: number;
+  name?: string | null;
+  type?: ('light' | 'medium' | 'heavy') | null;
+  weight?: number | null;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
-    relationTo: 'users';
-    value: string | User;
+    relationTo: 'user';
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -103,7 +291,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
