@@ -22,6 +22,9 @@ const nextConfig = {
     return config
   },
   output: 'standalone',
+  experimental: {
+    instrumentationHook: true,
+  },
 }
 
 export default withPayload(withNextIntl(nextConfig))
