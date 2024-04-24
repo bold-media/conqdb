@@ -12,14 +12,21 @@ const policies = {
     "'unsafe-inline'",
     'https://fonts.googleapis.com',
     'https://cdn.conqdb.com',
+    'https://fonts.gstatic.com/',
   ],
   'img-src': [
     "'self'",
+    'data:',
     'https://cdn.discordapp.com',
     'https://cdn.conqdb.com',
     'https://cdn.jsdelivr.net/',
   ],
-  'font-src': ["'self'", 'https://cdn.conqdb.com'],
+  'font-src': [
+    "'self'",
+    'https://cdn.conqdb.com',
+    'https://fonts.googleapis.com',
+    'https://fonts.gstatic.com/',
+  ],
   'frame-src': ["'self'"],
   'connect-src': ["'self'"],
 }

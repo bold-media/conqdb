@@ -42,7 +42,10 @@ export default buildConfig({
     UnitEra,
     Weapon,
   ],
-  plugins: [PayloadPluginCloudStorage, PayloadPluginNestedDocs],
+  plugins: [
+    PayloadPluginCloudStorage,
+    // PayloadPluginNestedDocs
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
