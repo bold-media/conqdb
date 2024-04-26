@@ -12,7 +12,5 @@ export const RowLabel = () => {
   const { data, path } = useRowLabel<LinkGroupItem>()
   const { i18n } = useTranslation()
 
-  console.log(data)
-
   return <PayloadRowLabel i18n={i18n} path={path} rowLabel={data?.link?.label || ''} />
 }

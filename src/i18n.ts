@@ -1,12 +1,12 @@
 import { notFound } from 'next/navigation'
 import { getRequestConfig } from 'next-intl/server'
-import { getPayload } from './lib/payload'
+// import { getPayload } from './lib/payload'
 import { locales } from './locales'
 
 export interface Messages {}
 
 const getTranslations = async (locale: string): Promise<Messages> => {
-  const payload = await getPayload()
+  // const payload = await getPayload()
 
   const messages = {}
 
