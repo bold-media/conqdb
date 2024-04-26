@@ -8,6 +8,7 @@ export const Profile: CollectionConfig = {
     useAsTitle: 'username',
     defaultColumns: ['username', 'level', 'createdAt', 'updatedAt'],
     hidden: ({ user }) => !user?.roles?.includes('admin'),
+    group: 'Admin',
   },
   fields: [
     {

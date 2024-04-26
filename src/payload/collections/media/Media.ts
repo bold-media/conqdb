@@ -9,6 +9,7 @@ export const Media: CollectionConfig = {
   admin: {
     useAsTitle: 'alt',
     defaultColumns: ['filename', 'alt', 'url', 'mimeType', 'updatedAt'],
+    hidden: ({ user }) => true,
   },
   hooks: {
     beforeChange: [generateFilename, generateBlurDataURL],

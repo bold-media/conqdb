@@ -10,6 +10,7 @@ const policies = {
   'style-src': [
     "'self'",
     "'unsafe-inline'",
+    'http://fonts.googleapis.com',
     'https://fonts.googleapis.com',
     'https://cdn.conqdb.com',
     'https://fonts.gstatic.com/',
@@ -59,7 +60,7 @@ const nextConfig = {
     })
     return config
   },
-  output: 'standalone',
+  // output: 'standalone',
 
   async headers() {
     const headers = []
@@ -76,15 +77,15 @@ const nextConfig = {
       })
     }
 
-    headers.push({
-      source: '/(.*)',
-      headers: [
-        {
-          key: 'Content-Security-Policy',
-          value: ContentSecurityPolicy,
-        },
-      ],
-    })
+    // headers.push({
+    //   source: '/(.*)',
+    //   headers: [
+    //     {
+    //       key: 'Content-Security-Policy',
+    //       value: ContentSecurityPolicy,
+    //     },
+    //   ],
+    // })
 
     return headers
   },

@@ -8,6 +8,7 @@ export const UnitEra: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'createdAt', 'updatedAt'],
+    group: 'Database',
   },
   access: contentAccess,
   defaultSort: 'weight',

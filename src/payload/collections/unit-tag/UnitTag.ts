@@ -8,6 +8,7 @@ export const UnitTag: CollectionConfig = {
   admin: {
     hidden: true,
     useAsTitle: 'name',
+    group: 'Database',
   },
   access: {
     create: ({ req }) => checkRole(['maintainer'], req.user),

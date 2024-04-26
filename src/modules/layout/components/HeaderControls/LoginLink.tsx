@@ -1,6 +1,6 @@
 'use server'
 import React from 'react'
-import { getUser } from '@/lib/payload'
+import { getUser } from '@/lib/auth'
 import { LoginLinkClient } from './LoginLinkClient'
 import { User } from 'payload-types'
 

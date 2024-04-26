@@ -1,6 +1,6 @@
 import { CollectionBeforeChangeHook } from 'payload/types'
 import { APIError } from 'payload/errors'
-import { generateUniqueFilename } from '@/payload/utilities/generateUniqueFilename'
+import { generateUniqueFilename } from '@/payload/utils/generateUniqueFilename'
 import { randomUUID } from 'crypto'
 
 export const generateFilename: CollectionBeforeChangeHook = ({ data, operation }) => {

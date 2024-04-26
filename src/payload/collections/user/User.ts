@@ -13,6 +13,7 @@ export const User: CollectionConfig = {
     useAsTitle: 'discordUsername',
     defaultColumns: ['discordUsername', 'roles', 'createdAt', 'updatedAt'],
     hidden: ({ user }) => !user?.roles?.includes('admin'),
+    group: 'Admin',
   },
 
   access: {

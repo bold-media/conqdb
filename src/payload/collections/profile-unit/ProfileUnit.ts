@@ -8,8 +8,8 @@ export const ProfileUnit: CollectionConfig = {
   admin: {
     useAsTitle: 'unit',
     defaultColumns: ['profile', 'unit', 'level', 'status', 'updatedAt'],
+    group: 'Admin',
   },
-  //todo: hide from admin for non admin
   access: {
     read: ({ req }) => checkRole(['admin'], req.user),
     update: ({ req }) => checkRole(['admin'], req.user),

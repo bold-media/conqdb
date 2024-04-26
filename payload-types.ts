@@ -6,23 +6,46 @@
  * and re-run `payload generate:types` to regenerate this file.
  */
 
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeaderLinks".
+ */
+export type HeaderLinks =
+  | {
+      type: 'link' | 'dropdown' | 'dropdownWithLink';
+      link?: LinkField;
+      label?: string | null;
+      links?:
+        | {
+            link?: LinkField;
+            id?: string | null;
+          }[]
+        | null;
+      id?: string | null;
+    }[]
+  | null;
+
 export interface Config {
   collections: {
-    user: User;
-    profile: Profile;
-    media: Media;
     page: Page;
-    'profile-unit': ProfileUnit;
+    template: Template;
     unit: Unit;
     'unit-tag': UnitTag;
     'unit-type': UnitType;
     'unit-category': UnitCategory;
     'unit-era': UnitEra;
     weapon: Weapon;
+    media: Media;
+    user: User;
+    profile: Profile;
+    'profile-unit': ProfileUnit;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  globals: {};
+  globals: {
+    layout: Layout;
+    settings: Setting;
+  };
   locale: 'ar' | 'cz' | 'de' | 'en' | 'pl' | 'ru' | 'tr';
   user: User & {
     collection: 'user';
@@ -30,101 +53,20 @@ export interface Config {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "user".
- */
-export interface User {
-  id: number;
-  roles?: ('banned' | 'user' | 'member' | 'maintainer' | 'admin')[] | null;
-  profile?: (number | null) | Profile;
-  discordId?: string | null;
-  discordUsername?: string | null;
-  discordDiscriminator?: string | null;
-  discordAccessToken?: string | null;
-  discordRefreshToken?: string | null;
-  discordAvatar?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  password?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "profile".
- */
-export interface Profile {
-  id: number;
-  username?: string | null;
-  level?: number | null;
-  lightLeadership?: number | null;
-  mediumLeadership?: number | null;
-  heavyLeadership?: number | null;
-  weapons?:
-    | {
-        leadership?: number | null;
-        id?: string | null;
-      }[]
-    | null;
-  slug?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  alt?: string | null;
-  blurDataURL?: string | null;
-  prefix?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  sizes?: {
-    blur?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    thumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "page".
  */
 export interface Page {
-  id: number;
+  id: string;
   title?: string | null;
   fullTitle?: string | null;
   slug?: string | null;
   pathname?: string | null;
-  parent?: (number | null) | Page;
+  parent?: (string | null) | Page;
+  template?: (string | null) | Template;
+  blocks?: Module[] | null;
   breadcrumbs?:
     | {
-        doc?: (number | null) | Page;
+        doc?: (string | null) | Page;
         url?: string | null;
         label?: string | null;
         id?: string | null;
@@ -132,36 +74,141 @@ export interface Page {
     | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "profile-unit".
+ * via the `definition` "template".
  */
-export interface ProfileUnit {
-  id: number;
-  profile: number | Profile;
-  unit: number | Unit;
-  level: number;
-  status: 'training' | 'ready' | 'maxed';
-  unlockedMasteryNodes?: number | null;
-  favorite?: boolean | null;
+export interface Template {
+  id: string;
+  name?: string | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Module".
+ */
+export interface Module {
+  module?: (LoginModule | ProfileModule | CreateProfileModule)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'module';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LoginModule".
+ */
+export interface LoginModule {
+  subtitle?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  loginWithDiscord?: string | null;
+  privacyPolicy?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  security?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'login';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProfileModule".
+ */
+export interface ProfileModule {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'profile';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CreateProfileModule".
+ */
+export interface CreateProfileModule {
+  features?:
+    | {
+        feature?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  createAProfile?: string | null;
+  subtitle?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  usernameDescription?: string | null;
+  slugDescription?: string | null;
+  submitLabel?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'create-profile';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "unit".
  */
 export interface Unit {
-  id: number;
+  id: string;
   name: string;
-  tags?: (number | UnitTag)[] | null;
+  tags?: (string | UnitTag)[] | null;
   leadership: number;
   stars: number;
   maxLevel: number;
-  type: number | UnitType;
-  category: number | UnitCategory;
-  era: number | UnitEra;
+  type: string | UnitType;
+  category: string | UnitCategory;
+  era: string | UnitEra;
   mastery: {
     hasMastery?: boolean | null;
     nodes?:
@@ -212,7 +259,7 @@ export interface Unit {
  * via the `definition` "unit-tag".
  */
 export interface UnitTag {
-  id: number;
+  id: string;
   name?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -222,7 +269,7 @@ export interface UnitTag {
  * via the `definition` "unit-type".
  */
 export interface UnitType {
-  id: number;
+  id: string;
   name?: string | null;
   weight?: number | null;
   updatedAt: string;
@@ -233,7 +280,7 @@ export interface UnitType {
  * via the `definition` "unit-category".
  */
 export interface UnitCategory {
-  id: number;
+  id: string;
   name?: string | null;
   weight?: number | null;
   updatedAt: string;
@@ -244,7 +291,7 @@ export interface UnitCategory {
  * via the `definition` "unit-era".
  */
 export interface UnitEra {
-  id: number;
+  id: string;
   name?: string | null;
   weight?: number | null;
   updatedAt: string;
@@ -255,7 +302,7 @@ export interface UnitEra {
  * via the `definition` "weapon".
  */
 export interface Weapon {
-  id: number;
+  id: string;
   name?: string | null;
   type?: ('light' | 'medium' | 'heavy') | null;
   weight?: number | null;
@@ -265,13 +312,111 @@ export interface Weapon {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: string;
+  alt?: string | null;
+  blurDataURL?: string | null;
+  prefix?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  sizes?: {
+    blur?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "user".
+ */
+export interface User {
+  id: string;
+  roles?: ('banned' | 'user' | 'member' | 'maintainer' | 'admin')[] | null;
+  profile?: (string | null) | Profile;
+  discordId?: string | null;
+  discordUsername?: string | null;
+  discordDiscriminator?: string | null;
+  discordAccessToken?: string | null;
+  discordRefreshToken?: string | null;
+  discordAvatar?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "profile".
+ */
+export interface Profile {
+  id: string;
+  username?: string | null;
+  level?: number | null;
+  lightLeadership?: number | null;
+  mediumLeadership?: number | null;
+  heavyLeadership?: number | null;
+  weapons?:
+    | {
+        leadership?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "profile-unit".
+ */
+export interface ProfileUnit {
+  id: string;
+  profile: string | Profile;
+  unit: string | Unit;
+  level: number;
+  status: 'training' | 'ready' | 'maxed';
+  unlockedMasteryNodes?: number | null;
+  favorite?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number;
+  id: string;
   user: {
     relationTo: 'user';
-    value: number | User;
+    value: string | User;
   };
   key?: string | null;
   value?:
@@ -291,11 +436,74 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number;
+  id: string;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "layout".
+ */
+export interface Layout {
+  id: string;
+  header: {
+    links?: HeaderLinks;
+    login?: LinkField;
+    actions?: {
+      switchLanguage?: string | null;
+      toggleColorScheme?: string | null;
+    };
+    userMenu?: {
+      notifications?: string | null;
+      profile?: LinkField;
+      createProfile?: LinkField;
+      dashboard?: LinkField;
+      joinRaid?: LinkField;
+      createRaid?: LinkField;
+      groupBuilder?: LinkField;
+      adminDashboard?: LinkField;
+      logout?: LinkField;
+    };
+  };
+  footer: {
+    developedBy?: string | null;
+    joinOurDiscord?: string | null;
+    joinDiscordLink?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LinkField".
+ */
+export interface LinkField {
+  type?: ('reference' | 'custom') | null;
+  newTab?: boolean | null;
+  reference?: (string | null) | Page;
+  url?: string | null;
+  label?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings".
+ */
+export interface Setting {
+  id: string;
+  pages: {
+    units?: {
+      defaultParentPage?: (string | null) | Page;
+      template?: (string | null) | Template;
+    };
+    unit?: {
+      defaultParentPage?: (string | null) | Page;
+      template?: (string | null) | Template;
+    };
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 
 

@@ -9,6 +9,7 @@ export const Weapon: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'type', 'slug', 'updatedAt'],
+    group: 'Database',
   },
   access: contentAccess,
   defaultSort: 'weight',

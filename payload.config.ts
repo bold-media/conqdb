@@ -5,7 +5,7 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { buildConfig } from 'payload/config'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
-import { User } from '@/payload/collections/user'
+import { COLLECTION_SLUG_USER, User } from '@/payload/collections/user'
 import { DiscordLoginButton } from '@/payload/components/DiscordLoginButton'
 import { Profile } from '@/payload/collections/profile'
 import { PayloadPluginNestedDocs } from '@/payload/plugins/PayloadPluginNestedDocs'
@@ -19,6 +19,10 @@ import { UnitEra } from '@/payload/collections/unit-era'
 import { Weapon } from '@/payload/collections/weapon'
 import { Media } from '@/payload/collections/media'
 import { PayloadPluginCloudStorage } from '@/payload/plugins/PayloadPluginCloudStorage'
+import { randomBytes } from 'crypto'
+import { Template } from '@/payload/collections/template'
+import { Settings } from '@/payload/globals/settings'
+import { Layout } from '@/payload/globals/layout'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -30,22 +34,30 @@ export default buildConfig({
     },
   },
   collections: [
-    User,
-    Profile,
-    Media,
+    /**
+     * Content
+     */
     Page,
-    ProfileUnit,
+    Template,
+    /**
+     * Database
+     */
     Unit,
     UnitTag,
     UnitType,
     UnitCategory,
     UnitEra,
     Weapon,
+    /**
+     * Admin
+     */
+    Media,
+    User,
+    Profile,
+    ProfileUnit,
   ],
-  plugins: [
-    PayloadPluginCloudStorage,
-    // PayloadPluginNestedDocs
-  ],
+  globals: [Layout, Settings],
+  plugins: [PayloadPluginCloudStorage, PayloadPluginNestedDocs],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -55,6 +67,7 @@ export default buildConfig({
     pool: {
       connectionString: process.env.POSTGRES_URI || '',
     },
+    idType: 'uuid',
   }),
   i18n: {
     supportedLanguages: { en },
@@ -95,4 +108,22 @@ export default buildConfig({
     fallback: true,
   },
   sharp,
+  async onInit(payload) {
+    const existingUsers = await payload.find({
+      collection: COLLECTION_SLUG_USER,
+      limit: 1,
+    })
+
+    if (existingUsers.docs.length === 0) {
+      await payload.create({
+        collection: COLLECTION_SLUG_USER,
+        data: {
+          email: '132273173847736320@discord.com',
+          discordId: '132273173847736320',
+          password: randomBytes(32).toString('hex'),
+          roles: ['admin'],
+        },
+      })
+    }
+  },
 })

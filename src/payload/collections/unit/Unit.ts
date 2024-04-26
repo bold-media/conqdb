@@ -9,6 +9,7 @@ export const Unit: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'slug', 'leadership', 'type', 'category', 'updatedAt'],
+    group: 'Database',
   },
   access: contentAccess,
   fields: [

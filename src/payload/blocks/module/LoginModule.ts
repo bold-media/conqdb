@@ -1,9 +1,10 @@
 import { Block } from 'payload/types'
 
-export const LoginBlock: Block = {
-  slug: 'login',
-  interfaceName: 'LoginBlock',
-  dbName: 'pgs_blk_login',
+export const BLOCK_SLUG_LOGIN = 'login'
+
+export const LoginModule: Block = {
+  slug: BLOCK_SLUG_LOGIN,
+  interfaceName: 'LoginModule',
   fields: [
     {
       name: 'subtitle',

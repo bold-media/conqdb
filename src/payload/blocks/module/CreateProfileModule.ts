@@ -1,14 +1,14 @@
 import { Block } from 'payload/types'
 
-export const CreateProfileBlock: Block = {
-  slug: 'createProfile',
-  interfaceName: 'CreateProfileBlock',
-  dbName: 'pages_blk_crProf',
+export const BLOCK_SLUG_CREATE_PROFILE = 'create-profile'
+
+export const CreateProfileModule: Block = {
+  slug: BLOCK_SLUG_CREATE_PROFILE,
+  interfaceName: 'CreateProfileModule',
   fields: [
     {
       name: 'features',
       type: 'array',
-      dbName: 'pages_blk_crProf_feat',
       maxRows: 2,
       fields: [
         {
