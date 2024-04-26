@@ -1,4 +1,5 @@
 import { checkRole } from '@/payload/access/checkRole'
+import { COLLECTION_SLUG_PAGE } from '@/payload/collections/page/Page'
 import { GlobalConfig } from 'payload/types'
 
 export const GLOBAL_SLUG_SETTINGS = 'settings'
@@ -20,6 +21,12 @@ export const Settings: GlobalConfig = {
         {
           name: 'pages',
           fields: [
+            {
+              name: 'profilePage',
+              type: 'relationship',
+              relationTo: COLLECTION_SLUG_PAGE,
+              hasMany: false,
+            },
             {
               type: 'group',
               name: 'units',
