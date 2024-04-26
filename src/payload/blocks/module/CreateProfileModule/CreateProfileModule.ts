@@ -1,15 +1,23 @@
 import { Block } from 'payload/types'
+import { RowLabel } from './RowLabel'
 
 export const BLOCK_SLUG_CREATE_PROFILE = 'create-profile'
 
 export const CreateProfileModule: Block = {
   slug: BLOCK_SLUG_CREATE_PROFILE,
   interfaceName: 'CreateProfileModule',
+  dbName: 'module_crProf',
   fields: [
     {
       name: 'features',
       type: 'array',
       maxRows: 2,
+      dbName: 'module_crProf_feat',
+      admin: {
+        components: {
+          RowLabel: RowLabel,
+        },
+      },
       fields: [
         {
           name: 'feature',

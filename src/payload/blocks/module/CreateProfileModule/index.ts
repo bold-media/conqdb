@@ -1,0 +1,1 @@
+export { CreateProfileModule } from './CreateProfileModule'
