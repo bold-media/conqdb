@@ -11,9 +11,9 @@ interface PublicLayoutProps {
   }
 }
 
-// export function generateStaticParams() {
-//   return locales.map((locale) => ({ locale }))
-// }
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }))
+}
 
 const Layout: React.FC<PublicLayoutProps> = async ({ children, params: { locale } }) => {
   unstable_setRequestLocale(locale)
