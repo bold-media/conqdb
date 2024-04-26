@@ -5,6 +5,7 @@ export const BLOCK_SLUG_LOGIN = 'login'
 export const LoginModule: Block = {
   slug: BLOCK_SLUG_LOGIN,
   interfaceName: 'LoginModule',
+  dbName: 'module_login',
   fields: [
     {
       name: 'subtitle',
