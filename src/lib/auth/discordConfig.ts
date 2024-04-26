@@ -1,4 +1,4 @@
-'server only'
+import 'server-only'
 import { fetchJson } from '@/utils/fetchJson'
 import { Discord } from 'arctic'
 import { User } from 'payload-types'
@@ -16,8 +16,7 @@ export const discordConfig = {
     const code = url.searchParams.get('code')
     if (!code) throw new Error('Authorization code not found.')
 
-    const { accessToken, refreshToken, accessTokenExpiresAt } =
-      await discord.validateAuthorizationCode(code)
+    const { accessToken, refreshToken } = await discord.validateAuthorizationCode(code)
 
     const discordUser = await fetchJson('https://discord.com/api/users/@me', {
       headers: {

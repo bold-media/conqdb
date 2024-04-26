@@ -1,4 +1,3 @@
-'use server'
 import React from 'react'
 import { getUser } from '@/lib/auth'
 import { LoginLinkClient } from './LoginLinkClient'

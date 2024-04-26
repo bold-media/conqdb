@@ -1,4 +1,4 @@
-'use server'
+import 'server-only'
 import { cookies, headers } from 'next/headers'
 import { redirect as nextRedirect } from 'next/navigation'
 import { PAYLOAD_COOKIE_NAME } from './constants'

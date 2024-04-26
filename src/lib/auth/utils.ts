@@ -1,7 +1,7 @@
-'server only'
+import 'server-only'
 import { getPayload } from '@/lib/payload'
 import { COLLECTION_SLUG_USER } from '@/payload/collections/user'
-import configPromise from '@payload-config'
+import payloadConfig from '@payload-config'
 import { randomBytes } from 'crypto'
 import { SignJWT } from 'jose'
 import { cookies } from 'next/headers'
@@ -145,7 +145,7 @@ export const getAuthResponseWithCookie = async (requestUrl: string) => {
 
     if (!userResponse) return new Response('Error finding or creating user.', { status: 500 })
 
-    const config = await configPromise
+    const config = await payloadConfig
 
     const sanitizedUserCollectionConfig = config.collections.find(
       (c) => c.slug === COLLECTION_SLUG_USER,

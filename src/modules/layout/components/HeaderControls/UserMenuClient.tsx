@@ -4,7 +4,6 @@ import { Layout, User } from 'payload-types'
 import React from 'react'
 import { IconBell, IconLogout, IconUser, IconUserCircle } from '@tabler/icons-react'
 import { Icon } from '@/modules/common/components/Icon'
-import { signOut } from '@/lib/auth'
 import { Link, usePathname } from '@/navigation'
 
 interface ProfileClientProps {
@@ -49,11 +48,7 @@ export const UserMenuClient: React.FC<ProfileClientProps> = ({ user, data }) => 
           <Menu.Item>{data?.createProfile?.label || 'Create Profile'}</Menu.Item>
         )}
         <Menu.Divider />
-        <Menu.Item
-          leftSection={<Icon icon={IconLogout} size="1rem" />}
-          c="red"
-          // onClick={() => signOut({ currentPath, redirectTo: '/login' })}
-        >
+        <Menu.Item leftSection={<Icon icon={IconLogout} size="1rem" />} c="red">
           Logout
         </Menu.Item>
       </Menu.Dropdown>
