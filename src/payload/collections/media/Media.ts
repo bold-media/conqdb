@@ -15,11 +15,12 @@ export const Media: CollectionConfig = {
     beforeChange: [generateFilename, generateBlurDataURL],
   },
   upload: {
-    disableLocalStorage: true,
+    disableLocalStorage: process.env.AWS_ACCESS_KEY ? true : false,
     mimeTypes: ['image/*'],
-    adminThumbnail: ({ doc }) =>
-      /** @ts-ignore */
-      `https://assets.conqdb.com/media/${doc?.sizes?.thumbnail?.filename}`,
+    adminThumbnail: process.env.AWS_ACCESS_KEY
+      ? /** @ts-ignore */
+        ({ doc }) => `https://assets.conqdb.com/media/${doc?.sizes?.thumbnail?.filename}`
+      : 'thumbnail',
     formatOptions: {
       format: 'webp',
       options: {

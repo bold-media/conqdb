@@ -15,6 +15,7 @@ export const adapter = s3Adapter({
 })
 
 export const PayloadPluginCloudStorage = cloudStorage({
+  enabled: process.env.AWS_ACCESS_KEY ? true : false,
   collections: {
     [COLLECTION_SLUG_MEDIA]: {
       adapter,
