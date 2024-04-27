@@ -2,8 +2,8 @@
 
 import React from 'react'
 import { MantineProvider } from '@mantine/core'
-import { ModalsProvider } from '@mantine/modals'
-import { Notifications } from '@mantine/notifications'
+// import { ModalsProvider } from '@mantine/modals'
+// import { Notifications } from '@mantine/notifications'
 import { theme } from '@/styles/theme'
 import { cssVariablesResolver } from '@/styles/cssVariablesResolver'
 
@@ -22,8 +22,10 @@ export const RootLayout: React.FC<RootLayout> = ({ children, font }) => {
       theme={{ ...theme, fontFamily: font.style.fontFamily }}
       cssVariablesResolver={cssVariablesResolver}
     >
-      <Notifications />
-      <ModalsProvider>{children}</ModalsProvider>
+      {/* <Notifications /> */}
+      {/* <ModalsProvider> */}
+      {children}
+      {/* </ModalsProvider> */}
     </MantineProvider>
   )
 }
