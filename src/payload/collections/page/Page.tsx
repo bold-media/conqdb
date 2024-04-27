@@ -1,11 +1,28 @@
 import { fullTitle } from '@/payload/fields/fullTitle'
 import { slug } from '@/payload/fields/slug'
 import { populatePathname } from '@/payload/hooks/populatePathname'
-import { CollectionConfig } from 'payload/types'
+import { Block, CollectionConfig, FieldWithRichTextRequiredEditor } from 'payload/types'
 import { createParentField } from '@payloadcms/plugin-nested-docs'
 import { checkRole } from '@/payload/access/checkRole'
 import { Module } from '@/payload/blocks/module'
+import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
+import { LoginModule } from '@/payload/blocks/module/LoginModule'
+import { ProfileModule } from '@/payload/blocks/module/ProfileModule'
+import { CreateProfileModule } from '@/payload/blocks/module/CreateProfileModule'
 export const COLLECTION_SLUG_PAGE = 'page'
+
+export type LexicalBlock = Omit<Block, 'fields'> & {
+  fields: FieldWithRichTextRequiredEditor[]
+}
+
+/**
+ * just enable/reenable localization, mess around with it a bit
+ * and you should see plenty of odd behavior.
+ * Give it a little time; sadly, these errors don't present themselves right away,
+ * but usually after making some more changes, or going to the frontend
+ * and doing something like changing the locale (to fetch user profile again)
+ * will kill the dev server and provide errors... of all sorts.
+ */
 
 export const Page: CollectionConfig = {
   slug: COLLECTION_SLUG_PAGE,
@@ -33,6 +50,7 @@ export const Page: CollectionConfig = {
       name: 'title',
       type: 'text',
       localized: true,
+      required: true,
     },
     fullTitle,
     slug(),
@@ -68,6 +86,24 @@ export const Page: CollectionConfig = {
     //   },
     //   blocks: [],
     // },
+    {
+      name: 'content',
+      type: 'richText',
+      localized: true,
+      editor: lexicalEditor({
+        /** @ts-ignore */
+        features: ({ defaultFeatures }) => [
+          ...defaultFeatures,
+          BlocksFeature({
+            blocks: [
+              LoginModule as LexicalBlock,
+              ProfileModule as LexicalBlock,
+              CreateProfileModule as LexicalBlock,
+            ],
+          }),
+        ],
+      }),
+    },
     {
       name: 'blocks',
       type: 'blocks',
