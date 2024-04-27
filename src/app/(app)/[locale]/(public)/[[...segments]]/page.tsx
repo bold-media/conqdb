@@ -3,6 +3,7 @@ import { locales } from '@/locales'
 import { ComingSoon } from '@/modules/common/templates/ComingSoon'
 import { Page } from '@/modules/layout/templates/Page'
 import { getPathSegments } from '@/modules/layout/utils/getPathSegments'
+import { COLLECTION_SLUG_PAGE } from '@/payload/collections/page/Page'
 import { resolvePathname } from '@/utils/resolvePathname'
 import { Metadata, ResolvingMetadata } from 'next'
 import { notFound } from 'next/navigation'
@@ -58,7 +59,35 @@ export async function generateMetadata(
   }
 }
 
-const PublicPages: React.FC = ({}) => {
+const PublicPages = async ({
+  params: { locale, segments },
+}: {
+  params: { locale: (typeof locales)[number]; segments: string[] }
+}) => {
+  let page
+  try {
+    const pathname = resolvePathname(segments)
+    const payload = await getPayload()
+    const { docs } = await payload.find({
+      collection: COLLECTION_SLUG_PAGE,
+      locale: locale,
+      depth: 10,
+      limit: 1,
+      where: {
+        pathname: {
+          equals: pathname,
+        },
+      },
+    })
+    page = docs[0] ?? null
+  } catch (error) {
+    notFound()
+  }
+
+  if (!page) {
+    notFound()
+  }
+
   return (
     <Page>
       <ComingSoon />
