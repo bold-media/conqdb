@@ -15,7 +15,6 @@ export const User: CollectionConfig = {
     hidden: ({ user }) => !user?.roles?.includes('admin'),
     group: 'Admin',
   },
-
   access: {
     read: ({ req }) => rolesOrUser(['admin'], req.user),
     create: ({ req }) => checkRole(['admin'], req.user),
