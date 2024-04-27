@@ -23,12 +23,14 @@ import { randomBytes } from 'crypto'
 import { Template } from '@/payload/collections/template'
 import { Settings } from '@/payload/globals/settings'
 import { Layout } from '@/payload/globals/layout'
+import { Translations } from '@/payload/globals/translations'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
   admin: {
+    user: COLLECTION_SLUG_USER,
     components: {
       afterLogin: [DiscordLoginButton],
     },
@@ -56,7 +58,7 @@ export default buildConfig({
     Profile,
     ProfileUnit,
   ],
-  globals: [Layout, Settings],
+  globals: [Layout, Translations, Settings],
   plugins: [PayloadPluginCloudStorage, PayloadPluginNestedDocs],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
