@@ -44,6 +44,7 @@ export interface Config {
   };
   globals: {
     layout: Layout;
+    translations: Translation;
     settings: Setting;
   };
   locale: 'ar' | 'cz' | 'de' | 'en' | 'pl' | 'ru' | 'tr';
@@ -488,11 +489,25 @@ export interface LinkField {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "translations".
+ */
+export interface Translation {
+  id: string;
+  common: {
+    available?: string | null;
+    unavailable?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "settings".
  */
 export interface Setting {
   id: string;
   pages: {
+    profilePage?: (string | null) | Page;
     units?: {
       defaultParentPage?: (string | null) | Page;
       template?: (string | null) | Template;
