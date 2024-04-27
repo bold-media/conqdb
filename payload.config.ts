@@ -24,6 +24,7 @@ import { Template } from '@/payload/collections/template'
 import { Settings } from '@/payload/globals/settings'
 import { Layout } from '@/payload/globals/layout'
 import { Translations } from '@/payload/globals/translations'
+import { seed } from '@/payload/seed'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -111,21 +112,8 @@ export default buildConfig({
   },
   sharp,
   async onInit(payload) {
-    const existingUsers = await payload.find({
-      collection: COLLECTION_SLUG_USER,
-      limit: 1,
-    })
-
-    if (existingUsers.docs.length === 0) {
-      await payload.create({
-        collection: COLLECTION_SLUG_USER,
-        data: {
-          email: '132273173847736320@discord.com',
-          discordId: '132273173847736320',
-          password: randomBytes(32).toString('hex'),
-          roles: ['admin'],
-        },
-      })
+    if (process.env.SEED) {
+      await seed(payload)
     }
   },
 })
