@@ -1,4 +1,4 @@
-import { AppShellHeader, Group } from '@mantine/core'
+import { AppShellHeader, Badge, Group } from '@mantine/core'
 import React from 'react'
 import { HeaderControls } from '../HeaderControls'
 import { HeaderLogo } from './HeaderLogo'
@@ -14,6 +14,9 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
       <Group align="center" justify="space-between" h="100%">
         <Group gap="xl">
           <HeaderLogo />
+          <Badge color="red" variant="light">
+            Beta
+          </Badge>
         </Group>
         <HeaderControls actions={data.actions} userMenu={data.userMenu} />
       </Group>
