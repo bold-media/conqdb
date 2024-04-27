@@ -11,6 +11,9 @@ interface IconProps extends BoxProps {
   strokeWidth?: number
 }
 
+/**
+ * Can only be used in a client component
+ */
 export const Icon = ({ icon, size = '1.4rem', strokeWidth = 1.7, className }: IconProps) => {
   return (
     <Box
