@@ -1,16 +1,21 @@
 import { Block } from 'payload/types'
 import { RowLabel } from './RowLabel'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { LexicalBlock, lexicalEditor } from '@payloadcms/richtext-lexical'
+import { lexicalTextEditor } from '@/payload/fields/lexicalTextEditor'
 
 export const BLOCK_SLUG_CREATE_PROFILE = 'create-profile'
 
 /**
  * richText must include the editor field, or the world will end
  */
-export const CreateProfileModule: Block = {
+export const CreateProfileModule: LexicalBlock = {
   slug: BLOCK_SLUG_CREATE_PROFILE,
   interfaceName: 'CreateProfileModule',
   dbName: 'module_crProf',
+  labels: {
+    singular: 'Create Profile Module',
+    plural: 'Create Profile Modules',
+  },
   fields: [
     {
       name: 'features',
@@ -39,7 +44,7 @@ export const CreateProfileModule: Block = {
       name: 'subtitle',
       type: 'richText',
       localized: true,
-      editor: lexicalEditor(),
+      editor: lexicalTextEditor,
     },
     {
       type: 'row',

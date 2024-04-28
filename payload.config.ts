@@ -1,7 +1,13 @@
 import path from 'path'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { en } from 'payload/i18n/en'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import {
+  BlocksFeature,
+  FeatureProviderServer,
+  LexicalBlock,
+  lexicalEditor,
+  LinkFeature,
+} from '@payloadcms/richtext-lexical'
 import { buildConfig } from 'payload/config'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
@@ -24,6 +30,7 @@ import { Settings } from '@/payload/globals/settings'
 import { Layout } from '@/payload/globals/layout'
 import { Translations } from '@/payload/globals/translations'
 import { seed } from '@/payload/seed'
+import { Module } from '@/payload/blocks/module'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -60,7 +67,20 @@ export default buildConfig({
   ],
   globals: [Layout, Translations, Settings],
   plugins: [PayloadPluginCloudStorage, PayloadPluginNestedDocs],
-  editor: lexicalEditor(),
+  // editor: lexicalEditor({
+  //   features: ({ defaultFeatures }) => [...defaultFeatures],
+  // }),
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [...defaultFeatures],
+  }),
+  // editor: lexicalEditor({
+  //   features: ({ defaultFeatures }) => [
+  //     BlocksFeature({
+  //       blocks: [Module],
+  //     }) as FeatureProviderServer<unknown, unknown>, //must type this, way, or "features" has type error
+  //     ...defaultFeatures,
+  //   ],
+  // }),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

@@ -5,10 +5,10 @@ import { Block, CollectionConfig, FieldWithRichTextRequiredEditor } from 'payloa
 import { createParentField } from '@payloadcms/plugin-nested-docs'
 import { checkRole } from '@/payload/access/checkRole'
 import { Module } from '@/payload/blocks/module'
-import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
-import { LoginModule } from '@/payload/blocks/module/LoginModule'
-import { ProfileModule } from '@/payload/blocks/module/ProfileModule'
+import { BlocksFeature, FeatureProviderServer, lexicalEditor } from '@payloadcms/richtext-lexical'
 import { CreateProfileModule } from '@/payload/blocks/module/CreateProfileModule'
+import { ProfileModule } from '@/payload/blocks/module/ProfileModule'
+import { LoginModule } from '@/payload/blocks/module/LoginModule'
 export const COLLECTION_SLUG_PAGE = 'page'
 
 export type LexicalBlock = Omit<Block, 'fields'> & {
@@ -91,23 +91,13 @@ export const Page: CollectionConfig = {
       type: 'richText',
       localized: true,
       editor: lexicalEditor({
-        /** @ts-ignore */
         features: ({ defaultFeatures }) => [
-          ...defaultFeatures,
           BlocksFeature({
-            blocks: [
-              LoginModule as LexicalBlock,
-              ProfileModule as LexicalBlock,
-              CreateProfileModule as LexicalBlock,
-            ],
-          }),
+            blocks: [LoginModule, ProfileModule, CreateProfileModule],
+          }) as FeatureProviderServer<unknown, unknown>,
+          ...defaultFeatures,
         ],
       }),
-    },
-    {
-      name: 'blocks',
-      type: 'blocks',
-      blocks: [Module],
     },
   ],
 }

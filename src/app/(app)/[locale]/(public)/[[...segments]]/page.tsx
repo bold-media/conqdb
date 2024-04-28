@@ -3,6 +3,7 @@ import { locales } from '@/locales'
 import { ComingSoon } from '@/modules/common/templates/ComingSoon'
 import { Page } from '@/modules/layout/templates/Page'
 import { getPathSegments } from '@/modules/layout/utils/getPathSegments'
+import { serializeLexical } from '@/modules/lexical/serializeLexical'
 import { COLLECTION_SLUG_PAGE } from '@/payload/collections/page/Page'
 import { resolvePathname } from '@/utils/resolvePathname'
 import { Metadata, ResolvingMetadata } from 'next'
@@ -88,11 +89,9 @@ const PublicPages = async ({
     notFound()
   }
 
-  return (
-    <Page>
-      <ComingSoon />
-    </Page>
-  )
+  const content = await serializeLexical(page.content)
+
+  return <Page>{content}</Page>
 }
 
 export default PublicPages
