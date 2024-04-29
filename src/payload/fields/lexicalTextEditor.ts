@@ -12,14 +12,6 @@ import { COLLECTION_SLUG_PAGE } from '../collections/page/Page'
 
 export const lexicalTextEditor: LexicalRichTextAdapter = lexicalEditor({
   features: ({ defaultFeatures }) => [
-    // LinkFeature({
-    //   enabledCollections: [COLLECTION_SLUG_PAGE],
-    //   // fields: [{
-    //   // 	name: "type",
-    //   // 	type: "radio",
-    //   // 	defaultValue: 'reference',
-    //   // }]
-    // }) as FeatureProviderServer<unknown, unknown>,
     ...(pickKeys(defaultFeatures, [
       'bold',
       'italic',
@@ -30,7 +22,9 @@ export const lexicalTextEditor: LexicalRichTextAdapter = lexicalEditor({
       'inlinecode',
       'paragraph',
       'align',
-      'link',
     ]) as FeatureProviderServer<unknown, unknown>[]),
+    LinkFeature({
+      enabledCollections: ['page'],
+    }) as FeatureProviderServer<unknown, unknown>,
   ],
 })
