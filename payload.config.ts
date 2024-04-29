@@ -67,20 +67,14 @@ export default buildConfig({
   ],
   globals: [Layout, Translations, Settings],
   plugins: [PayloadPluginCloudStorage, PayloadPluginNestedDocs],
-  // editor: lexicalEditor({
-  //   features: ({ defaultFeatures }) => [...defaultFeatures],
-  // }),
   editor: lexicalEditor({
-    features: ({ defaultFeatures }) => [...defaultFeatures],
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures,
+      LinkFeature({
+        enabledCollections: ['page'],
+      }) as FeatureProviderServer<unknown, unknown>,
+    ],
   }),
-  // editor: lexicalEditor({
-  //   features: ({ defaultFeatures }) => [
-  //     BlocksFeature({
-  //       blocks: [Module],
-  //     }) as FeatureProviderServer<unknown, unknown>, //must type this, way, or "features" has type error
-  //     ...defaultFeatures,
-  //   ],
-  // }),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
