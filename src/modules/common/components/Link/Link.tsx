@@ -1,19 +1,16 @@
 'use client'
 
 import React from 'react'
-import { Anchor } from '@mantine/core'
+import { Anchor, AnchorProps } from '@mantine/core'
 import { Link as NextLink } from '@/navigation'
 
 import { PolymorphicComponentProps } from '@mantine/core'
 
-type LinkProps<C extends React.ElementType> = PolymorphicComponentProps<
-  C,
-  {
-    href?: string
-  }
->
+type LinkProps = Omit<AnchorProps, 'href'> & { href: string; children: React.ReactNode }
 
-export const Link: React.FC<LinkProps<typeof NextLink>> = ({ children, href, ...props }) => {
+type CombinedProps = LinkProps & AnchorProps
+
+export const Link: React.FC<CombinedProps> = ({ children, href, ...props }) => {
   return (
     <Anchor component={NextLink as any} href={href} {...props}>
       {children}
