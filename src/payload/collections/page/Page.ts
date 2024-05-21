@@ -1,19 +1,20 @@
 import { fullTitle } from '@/payload/fields/fullTitle'
 import { slug } from '@/payload/fields/slug'
 import { populatePathname } from '@/payload/hooks/populatePathname'
-import { Block, CollectionConfig, FieldWithRichTextRequiredEditor } from 'payload/types'
+import { CollectionConfig } from 'payload/types'
 import { createParentField } from '@payloadcms/plugin-nested-docs'
 import { checkRole } from '@/payload/access/checkRole'
 import { Module } from '@/payload/blocks/module'
-import { BlocksFeature, FeatureProviderServer, lexicalEditor } from '@payloadcms/richtext-lexical'
+import {
+  BlocksFeature,
+  FeatureProviderServer,
+  lexicalEditor,
+  LinkFeature,
+} from '@payloadcms/richtext-lexical'
 import { CreateProfileModule } from '@/payload/blocks/module/CreateProfileModule'
 import { ProfileModule } from '@/payload/blocks/module/ProfileModule'
 import { LoginModule } from '@/payload/blocks/module/LoginModule'
 export const COLLECTION_SLUG_PAGE = 'page'
-
-export type LexicalBlock = Omit<Block, 'fields'> & {
-  fields: FieldWithRichTextRequiredEditor[]
-}
 
 /**
  * just enable/reenable localization, mess around with it a bit
@@ -73,19 +74,25 @@ export const Page: CollectionConfig = {
         position: 'sidebar',
       },
     },
-    // {
-    //   name: 'beforeTemplate',
-    //   label: 'Before Template Blocks',
-    //   labels: {
-    //     singular: 'Block',
-    //     plural: 'Blocks',
-    //   },
-    //   type: 'blocks',
-    //   admin: {
-    //     condition: (_, siblingData) => siblingData.template,
-    //   },
-    //   blocks: [],
-    // },
+    {
+      name: 'beforeTemplate',
+      type: 'richText',
+      localized: true,
+      admin: {
+        condition: (_, siblingData) => siblingData.template,
+      },
+      editor: lexicalEditor({
+        features: ({ defaultFeatures }) => [
+          BlocksFeature({
+            blocks: [LoginModule, ProfileModule, CreateProfileModule],
+          }) as FeatureProviderServer<unknown, unknown>,
+          ...defaultFeatures,
+          LinkFeature({
+            enabledCollections: ['page'],
+          }) as FeatureProviderServer<unknown, unknown>,
+        ],
+      }),
+    },
     {
       name: 'content',
       type: 'richText',
@@ -96,6 +103,9 @@ export const Page: CollectionConfig = {
             blocks: [LoginModule, ProfileModule, CreateProfileModule],
           }) as FeatureProviderServer<unknown, unknown>,
           ...defaultFeatures,
+          LinkFeature({
+            enabledCollections: ['page'],
+          }) as FeatureProviderServer<unknown, unknown>,
         ],
       }),
     },
