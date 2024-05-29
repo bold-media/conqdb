@@ -212,7 +212,7 @@ export const seed = async (payload: Payload) => {
               id: res.id,
               locale: 'de',
               data: {
-                name: 'Bogenschütze ', //need the correct "u"
+                name: 'Bogenschütze ',
               },
             })
           }),
