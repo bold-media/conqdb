@@ -1,7 +1,8 @@
 import 'server-only'
-import { getPayload as getPayloadInstance } from 'payload'
+import { getPayloadHMR as getPayloadInstance } from '@payloadcms/next/utilities'
 import configPromise from '@payload-config'
 
 export const getPayload = async () => {
-  return getPayloadInstance({ config: await configPromise })
+  const config = await configPromise
+  return getPayloadInstance({ config })
 }
