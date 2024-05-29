@@ -11,7 +11,7 @@ export const DiscordLoginButton = () => {
   const router = useRouter()
 
   const login = () => {
-    router.push(`/api/auth/discord${redirect ? `?redirect=${redirect}` : '/admin'}`)
+    router.push(`/api/auth/discord${redirect ? `?redirect=${redirect}` : '?redirect=/admin'}`)
   }
 
   return (
