@@ -1,13 +1,7 @@
 import path from 'path'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { en } from 'payload/i18n/en'
-import {
-  BlocksFeature,
-  FeatureProviderServer,
-  LexicalBlock,
-  lexicalEditor,
-  LinkFeature,
-} from '@payloadcms/richtext-lexical'
+import { FeatureProviderServer, lexicalEditor, LinkFeature } from '@payloadcms/richtext-lexical'
 import { buildConfig } from 'payload/config'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
@@ -24,13 +18,13 @@ import { UnitCategory } from '@/payload/collections/unit-category'
 import { UnitEra } from '@/payload/collections/unit-era'
 import { Weapon } from '@/payload/collections/weapon'
 import { Media } from '@/payload/collections/media'
-import { PayloadPluginCloudStorage } from '@/payload/plugins/PayloadPluginCloudStorage'
 import { Template } from '@/payload/collections/template'
 import { Settings } from '@/payload/globals/settings'
 import { Layout } from '@/payload/globals/layout'
 import { Translations } from '@/payload/globals/translations'
 import { seed } from '@/payload/seed'
 import { Module } from '@/payload/blocks/module'
+import { PayloadStorageS3 } from '@/payload/plugins/PayloadStorageS3'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -66,7 +60,7 @@ export default buildConfig({
     ProfileUnit,
   ],
   globals: [Layout, Translations, Settings],
-  plugins: [PayloadPluginCloudStorage, PayloadPluginNestedDocs],
+  plugins: [PayloadStorageS3, PayloadPluginNestedDocs],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
       ...defaultFeatures,
