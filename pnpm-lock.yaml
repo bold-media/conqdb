@@ -5,12 +5,15 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+<<<<<<< Updated upstream
   '@aws-sdk/client-s3':
     specifier: ^3.556.0
     version: 3.564.0
   '@aws-sdk/lib-storage':
     specifier: ^3.556.0
     version: 3.564.0(@aws-sdk/client-s3@3.564.0)
+=======
+>>>>>>> Stashed changes
   '@mantine/carousel':
     specifier: ^7.8.0
     version: 7.8.1(@mantine/core@7.8.1)(@mantine/hooks@7.8.1)(embla-carousel-react@8.0.2)(react-dom@18.3.1)(react@18.3.1)
@@ -48,11 +51,16 @@ dependencies:
     specifier: 3.0.0-beta.19
     version: 3.0.0-beta.19(@types/react@18.3.1)(payload@3.0.0-beta.19)(react@18.3.1)
   '@payloadcms/next':
+<<<<<<< Updated upstream
     specifier: 3.0.0-beta.19
     version: 3.0.0-beta.19(@types/react@18.3.1)(file-type@16.5.4)(graphql@16.8.1)(http-status@1.6.2)(monaco-editor@0.48.0)(next@14.3.0-canary.7)(payload@3.0.0-beta.19)(react-dom@18.3.1)(react@18.3.1)(scheduler@0.23.2)
   '@payloadcms/plugin-cloud-storage':
     specifier: 3.0.0-beta.19
     version: 3.0.0-beta.19(@aws-sdk/client-s3@3.564.0)(@aws-sdk/lib-storage@3.564.0)(payload@3.0.0-beta.19)
+=======
+    specifier: 3.0.0-beta.14
+    version: 3.0.0-beta.14(@types/react@18.2.79)(file-type@16.5.4)(graphql@16.8.1)(http-status@1.6.2)(monaco-editor@0.47.0)(next@14.3.0-canary.7)(payload@3.0.0-beta.14)(react-dom@18.2.0)(react@18.2.0)(scheduler@0.23.0)
+>>>>>>> Stashed changes
   '@payloadcms/plugin-nested-docs':
     specifier: 3.0.0-beta.19
     version: 3.0.0-beta.19(payload@3.0.0-beta.19)
@@ -60,8 +68,16 @@ dependencies:
     specifier: 3.0.0-beta.19
     version: 3.0.0-beta.19(@payloadcms/translations@3.0.0-beta.19)(@payloadcms/ui@3.0.0-beta.19)(payload@3.0.0-beta.19)(react@18.3.1)
   '@payloadcms/richtext-lexical':
+<<<<<<< Updated upstream
     specifier: 3.0.0-beta.19
     version: 3.0.0-beta.19(@lexical/clipboard@0.13.1)(@payloadcms/next@3.0.0-beta.19)(@payloadcms/translations@3.0.0-beta.19)(@payloadcms/ui@3.0.0-beta.19)(payload@3.0.0-beta.19)(react-dom@18.3.1)(react@18.3.1)(typescript@5.4.5)(yjs@13.6.15)
+=======
+    specifier: 3.0.0-beta.14
+    version: 3.0.0-beta.14(@lexical/clipboard@0.13.1)(@payloadcms/next@3.0.0-beta.14)(@payloadcms/translations@3.0.0-beta.14)(@payloadcms/ui@3.0.0-beta.14)(payload@3.0.0-beta.14)(typescript@5.4.5)(yjs@13.6.14)
+  '@payloadcms/storage-s3':
+    specifier: 3.0.0-beta.37
+    version: 3.0.0-beta.37(payload@3.0.0-beta.14)
+>>>>>>> Stashed changes
   '@payloadcms/ui':
     specifier: 3.0.0-beta.19
     version: 3.0.0-beta.19(@types/react@18.3.1)(monaco-editor@0.48.0)(next@14.3.0-canary.7)(payload@3.0.0-beta.19)(react-dom@18.3.1)(react@18.3.1)(scheduler@0.23.2)
@@ -3967,8 +3983,13 @@ packages:
       - utf-8-validate
     dev: false
 
+<<<<<<< Updated upstream
   /@payloadcms/plugin-cloud-storage@3.0.0-beta.19(@aws-sdk/client-s3@3.564.0)(@aws-sdk/lib-storage@3.564.0)(payload@3.0.0-beta.19):
     resolution: {integrity: sha512-VPfHvbf9YUzH2W8W+N0zdFaR1PlLQZ8PbAbCmp7l3hkJSR9nZzkkaIsZec9HKwhUiXiDkLMzxAKk8qFYfZqAcg==}
+=======
+  /@payloadcms/plugin-cloud-storage@3.0.0-beta.37(@aws-sdk/client-s3@3.556.0)(@aws-sdk/lib-storage@3.556.0)(payload@3.0.0-beta.14):
+    resolution: {integrity: sha512-rg/aV67DI7B2ESeSK4J6jRTRLoLYonYexpztOp8CDH8bnBvTxtRVZiGmPVUGjPUkh8B3DzYSdmRnLIy5GDURwg==}
+>>>>>>> Stashed changes
     peerDependencies:
       '@aws-sdk/client-s3': ^3.525.0
       '@aws-sdk/lib-storage': ^3.525.0
@@ -3976,7 +3997,11 @@ packages:
       '@azure/storage-blob': ^12.11.0
       '@google-cloud/storage': ^7.7.0
       '@vercel/blob': ^0.22.3
+<<<<<<< Updated upstream
       payload: 3.0.0-beta.19
+=======
+      payload: 3.0.0-beta.37
+>>>>>>> Stashed changes
     peerDependenciesMeta:
       '@aws-sdk/client-s3':
         optional: true
@@ -4061,8 +4086,31 @@ packages:
       - yjs
     dev: false
 
+<<<<<<< Updated upstream
   /@payloadcms/translations@3.0.0-beta.19:
     resolution: {integrity: sha512-io9LDjOHd8cMzdv63V3kQkyERJZJSG0edlYbVgRBJKzKkNOwJhNcw32duWZenyyHJmvqEuHHaTuri/S6d7ABpQ==}
+=======
+  /@payloadcms/storage-s3@3.0.0-beta.37(payload@3.0.0-beta.14):
+    resolution: {integrity: sha512-Rzly01EPiTi9ZaBIibsLMPaQcNJCldbWU6FtHiJ9L4A8qMCEmC8te9FyqRuJvXyndsp9Xv292S+Y3EE59aUuWA==}
+    engines: {node: '>=18.20.2'}
+    peerDependencies:
+      payload: 3.0.0-beta.37
+    dependencies:
+      '@aws-sdk/client-s3': 3.556.0
+      '@aws-sdk/lib-storage': 3.556.0(@aws-sdk/client-s3@3.556.0)
+      '@payloadcms/plugin-cloud-storage': 3.0.0-beta.37(@aws-sdk/client-s3@3.556.0)(@aws-sdk/lib-storage@3.556.0)(payload@3.0.0-beta.14)
+      payload: 3.0.0-beta.14(@swc/core@1.4.16)(@swc/types@0.1.6)(graphql@16.8.1)
+    transitivePeerDependencies:
+      - '@azure/abort-controller'
+      - '@azure/storage-blob'
+      - '@google-cloud/storage'
+      - '@vercel/blob'
+      - aws-crt
+    dev: false
+
+  /@payloadcms/translations@3.0.0-beta.14:
+    resolution: {integrity: sha512-qF7eF7Eu+eScZ5WYzObQNODLmvcsXJ7dr548hdECS803upN5R+ojCu+tV9lfj8XNtS3P8pgA+WQmUg1jauPNuw==}
+>>>>>>> Stashed changes
     dev: false
 
   /@payloadcms/ui@3.0.0-beta.19(@types/react@18.3.1)(monaco-editor@0.48.0)(next@14.3.0-canary.7)(payload@3.0.0-beta.19)(react-dom@18.3.1)(react@18.3.1)(scheduler@0.23.2):
