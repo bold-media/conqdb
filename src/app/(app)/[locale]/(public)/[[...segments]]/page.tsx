@@ -68,6 +68,7 @@ const PublicPages = async ({
   let page
   try {
     const pathname = resolvePathname(segments)
+    console.log(pathname)
     const payload = await getPayload()
     const { docs } = await payload.find({
       collection: COLLECTION_SLUG_PAGE,
@@ -80,6 +81,7 @@ const PublicPages = async ({
         },
       },
     })
+
     page = docs[0] ?? null
   } catch (error) {
     notFound()
@@ -90,6 +92,8 @@ const PublicPages = async ({
   }
 
   const content = await serializeLexical(page.content)
+
+  console.log(content)
 
   return <Page>{content}</Page>
 }

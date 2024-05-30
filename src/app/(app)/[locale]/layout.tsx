@@ -15,9 +15,9 @@ interface RootLayout {
 }
 
 const Layout: React.FC<RootLayout> = ({ children, params: { locale } }) => {
+  unstable_setRequestLocale(locale)
   const font = selectFont(locale)
   const dir = getDirFromLocale(locale)
-  unstable_setRequestLocale(locale)
 
   return (
     <html lang={locale} dir={dir}>
