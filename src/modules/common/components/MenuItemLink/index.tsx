@@ -1,1 +1,0 @@
-export { MenuItemLink } from './MenuItemLink'

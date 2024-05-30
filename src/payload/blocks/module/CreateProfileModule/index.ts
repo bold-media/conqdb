@@ -1,1 +1,0 @@
-export { CreateProfileModule } from './CreateProfileModule'

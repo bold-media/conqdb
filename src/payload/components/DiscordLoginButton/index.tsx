@@ -1,1 +1,0 @@
-export { DiscordLoginButton } from './DiscordLoginButton'
