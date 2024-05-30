@@ -1,3 +1,4 @@
+'use client'
 import { createTheme } from '@mantine/core'
 import { components } from './components'
 import { colors } from './colors'
