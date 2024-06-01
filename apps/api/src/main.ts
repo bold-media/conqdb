@@ -7,9 +7,12 @@ import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import postgres from 'postgres';
 import { drizzle } from 'drizzle-orm/postgres-js';
-import { Logger } from '@nestjs/common';
-import { migrate } from 'drizzle-orm/postgres-js/migrator'
+import { Logger, ValidationPipe } from '@nestjs/common';
+import { migrate } from 'drizzle-orm/postgres-js/migrator';
 import path from 'path';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { docsApiReference } from './config/docsApiReference.config';
+import { swaggerConfig } from './config/swagger.config';
 
 async function migrateDatabase(databaseUrl: string) {
   const client = postgres(databaseUrl, { max: 1, onnotice: () => {}})
@@ -36,9 +39,22 @@ async function bootstrap() {
     new FastifyAdapter()
   )
 
+
   const configService = app.get(ConfigService);
 
   await migrateDatabase(configService.get<string>('POSTGRES_URL'));
+  
+  const apiDocument = SwaggerModule.createDocument(app, swaggerConfig);
+
+  app.use('/docs', docsApiReference(apiDocument))
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      disableErrorMessages: configService.get('NODE_ENV') === 'production',
+      whitelist: true,
+      forbidNonWhitelisted: true
+    })
+  )
 
   const PORT = configService.get<number>('PORT');
 

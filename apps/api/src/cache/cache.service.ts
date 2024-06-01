@@ -1,5 +1,5 @@
 import { CACHE_MANAGER } from "@nestjs/cache-manager";
-import { Inject, Injectable } from "@nestjs/common";
+import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { Cache } from "cache-manager";
 
 @Injectable()
@@ -13,7 +13,15 @@ export class CacheService {
     }
 
     async getCacheKey(key: string): Promise<string> {
-        return await this.cacheManager.get(key)
+        const value: string = await this.cacheManager.get(key)
+
+        if (!value) {
+            throw new NotFoundException(
+            `Cache key: '${key}' not found`
+            )
+        }
+
+        return value
     }
 
     async deleteCacheKey(key: string): Promise<void> {

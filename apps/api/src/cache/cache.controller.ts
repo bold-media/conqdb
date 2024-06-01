@@ -1,60 +1,84 @@
-import { Controller, Delete, Get, Inject, Param, Post, Query } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Inject, Param, Post } from "@nestjs/common";
 import { CacheService } from "./cache.service";
 import { ROUTES, SERVICES } from "@app/utils/constants";
+import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { CacheItemCreatedResponseDto, CacheItemDeletedResponseDto, CacheItemNotFoundResponseDto, CacheItemResponseDto, SetCacheItemDto } from "./dto/cacheItem.dto";
+import { CacheKeysResetResponseDto, CacheKeysResponseDto } from "./dto/cacheKeys.dto";
 
+@ApiTags(ROUTES.CACHE.toUpperCase())
 @Controller(ROUTES.CACHE)
+/**
+ * Testing description
+ */
 export class CacheController {
     constructor(
         @Inject(SERVICES.CACHE) private readonly cacheService: CacheService
     ) {}
 
     @Get()
-    async cacheStore() {
+    @ApiOperation({ summary: 'Get All Cache Keys', description: 'Testing ApiOperation description...'})
+    @ApiResponse({ status: 200, description: '**OK**', type: CacheKeysResponseDto })
+    async cacheStore(): Promise<CacheKeysResponseDto> {
         const store = await this.cacheService.cacheStore();
         return {
             success: true,
-            status: 200,
-            data: store
+            statusCode: 200,
+            keys: store
         }
     }
 
     @Get('/:key')
-    async getCacheKey(@Param('key') key: string) {
+    @ApiOperation({ summary: 'Get Cache Item by Key'})
+    @ApiResponse({ status: 200, description: '**OK**', type: CacheItemResponseDto })
+    @ApiResponse({ status: 404, description: '**Not Found**', type: CacheItemNotFoundResponseDto})
+    async getCacheKey(@Param('key') key: string): Promise<CacheItemResponseDto> {
         const data = await this.cacheService.getCacheKey(key);
         return {
             success: true,
-            status: 200,
-            data
+            statusCode: 200,
+            cache: {
+                key,
+                value: data
+            }
         }
     }
 
     @Post()
-    async setCacheKey(@Query('key') key: string, @Query('value') value: string) {
+    @ApiOperation({ summary: 'Set Cache Item'})
+    @ApiResponse({ status: 201, description: '**Created**', type: CacheItemCreatedResponseDto })
+    async setCacheKey(@Body() {key, value}: SetCacheItemDto): Promise<CacheItemCreatedResponseDto> {
         await this.cacheService.setCacheKey(key, value);
         return {
             success: true,
-            status: 201,
-            message: `Key: ${key}, with value: ${value} has been set`
+            statusCode: 201,
+            cache: {
+                key,
+                value
+            }
         }
     }
 
     @Delete('/:key')
-    async deleteCacheKey(@Param('key') key: string) {
+    @ApiOperation({ summary: 'Delete Cache Item by Key'})
+    @ApiResponse({ status: 204, description: '**Deleted**', type: CacheItemDeletedResponseDto})
+    async deleteCacheKey(@Param('key') key: string): Promise<CacheItemDeletedResponseDto> {
         await this.cacheService.deleteCacheKey(key);
         return {
+            cache: null,
             success: true,
-            status: 201,
-            message: `Key: ${key} has been deleted.`
+            statusCode: 204,
         }
     }
 
     @Get('/reset')
-    async resetCache() {
+    @ApiOperation({ summary: 'Reset Cache'})
+    @ApiResponse({ status: 200, description: '**Deleted**', type: CacheKeysResetResponseDto})
+    async resetCache(): Promise<CacheKeysResetResponseDto> {
         await this.cacheService.resetCache();
         return {
+            keys: [],
             success: true,
-            status: 200,
-            message: 'Cache has been reset.'
+            statusCode: 200,
         }
     }
 }
