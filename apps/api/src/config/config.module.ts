@@ -12,7 +12,10 @@ import * as Joi from 'joi';
                     .valid('development', 'production', 'test')
                     .default('development'),
                 PORT: Joi.number().port().default(8000),
-                POSTGRES_URL: Joi.string().required() 
+                POSTGRES_URL: Joi.string().required(),
+                REDIS_HOST: Joi.string().required(),
+                REDIS_PORT: Joi.number().port().default(6379),
+                REDIS_PASS: Joi.string(),
             })
         })
     ]
