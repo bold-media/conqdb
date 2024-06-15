@@ -14,8 +14,7 @@ import { SwaggerModule } from '@nestjs/swagger';
 import { docsApiReference } from './config/docsApiReference.config';
 import { swaggerConfig } from './config/swagger.config';
 import { fastifyCookie } from '@fastify/cookie';
-import { AuthGuard } from './auth/auth.guard';
-import { AuthService } from './auth/auth.service';
+import { fastifyCors } from '@fastify/cors';
 
 async function migrateDatabase(databaseUrl: string) {
   const client = postgres(databaseUrl, { max: 1, onnotice: () => {} });
@@ -45,6 +44,12 @@ async function bootstrap() {
   );
 
   const configService = app.get(ConfigService);
+
+  await app.register(fastifyCors, {
+    origin: configService.get('FRONTEND_URL'),
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  });
 
   await migrateDatabase(configService.get<string>('POSTGRES_URL'));
 

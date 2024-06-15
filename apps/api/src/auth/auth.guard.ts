@@ -24,10 +24,6 @@ export class AuthGuard implements CanActivate {
       context.getClass(),
     ]);
 
-    if (isPublic) {
-      return true;
-    }
-
     const request = context.switchToHttp().getRequest();
     const apiKey = request.headers['x-api-key'];
     const sessionId = request.cookies[SESSION_COOKIE_NAME];
@@ -45,6 +41,10 @@ export class AuthGuard implements CanActivate {
         request.user = user;
         return true;
       }
+    }
+
+    if (isPublic) {
+      return true;
     }
 
     throw new UnauthorizedException('Unauthorized');

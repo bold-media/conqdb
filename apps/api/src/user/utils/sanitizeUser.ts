@@ -3,8 +3,8 @@ export const sanitizeUser = (user: any) => {
     discordAccessToken,
     discordRefreshToken,
     discordTokenExpiration,
-    sessions,
-    apiKeys,
+    session,
+    apiKey,
     ...sanitizedUser
   } = user;
   return sanitizedUser;

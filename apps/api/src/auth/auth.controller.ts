@@ -64,9 +64,12 @@ export class AuthController {
     }
   }
 
+  @Public()
   @Get('/me')
   async me(@Req() req: FastifyRequest, @Res() res: FastifyReply) {
-    return res.status(200).send({ user: sanitizeUser(req.user) });
+    return res
+      .status(200)
+      .send({ user: req.user ? sanitizeUser(req.user) : null });
   }
 
   @Public()
