@@ -1,13 +1,16 @@
 import { OpenAPIObject } from '@nestjs/swagger';
 import { apiReference } from '@scalar/nestjs-api-reference';
 
-export const docsApiReference = (document: OpenAPIObject): ReturnType<typeof apiReference> => apiReference({
+export const docsApiReference = (
+  document: OpenAPIObject,
+): ReturnType<typeof apiReference> =>
+  apiReference({
     metaData: {
       title: 'ConqDB API Reference Docs',
       description: 'API reference docs for conqdb.com',
     },
     spec: {
-      content: document
+      content: document,
     },
     withFastify: true,
     theme: 'default',
@@ -21,4 +24,4 @@ export const docsApiReference = (document: OpenAPIObject): ReturnType<typeof api
         margin-bottom: 1.1rem;
       }
     `,
-  }, )
+  });

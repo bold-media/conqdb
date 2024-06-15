@@ -10,6 +10,7 @@ function loadConfig() {
     dotenv.config({ path: path.join(basePath, '.env') }); // Load default .env
 
     return {
+        machineId: parseInt(process.env.MACHINE_ID),
         postgresUrl: process.env.POSTGRES_URL
     }
 }

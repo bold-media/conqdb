@@ -24,6 +24,7 @@
     "studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@fastify/cookie": "^8.3.0",
     "@fastify/static": "^7.0.4",
     "@fastify/swagger": "^8.14.0",
     "@nestjs/cache-manager": "^2.2.2",
@@ -37,12 +38,17 @@
     "cache-manager-redis-store": "2",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "discord-oauth2": "^2.12.1",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.31.0",
+    "fastify": "^4.26.2",
     "joi": "^17.13.1",
+    "nanoid": "^3.3.7",
+    "oslo": "^1.2.0",
     "postgres": "^3.4.4",
     "reflect-metadata": "^0.2.0",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "sonyflake": "^1.1.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",

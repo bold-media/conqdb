@@ -3,14 +3,15 @@ import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import { DATABASE_CONNECTION_KEY } from './database.decorator';
 import { DatabaseService } from './database.service';
 import { schema } from './schema/index.schema';
+import { SERVICES } from '@app/utils/constants';
 
 @Global()
 @Module({
   providers: [
-    DatabaseService,
+    { provide: SERVICES.DATABASE, useClass: DatabaseService },
     {
       provide: DATABASE_CONNECTION_KEY,
-      inject: [DatabaseService],
+      inject: [SERVICES.DATABASE],
       useFactory: async (
         databaseService: DatabaseService,
       ): Promise<PostgresJsDatabase<typeof schema>> => {
@@ -18,6 +19,9 @@ import { schema } from './schema/index.schema';
       },
     },
   ],
-  exports: [DATABASE_CONNECTION_KEY],
+  exports: [
+    DATABASE_CONNECTION_KEY,
+    { provide: SERVICES.DATABASE, useClass: DatabaseService },
+  ],
 })
 export class DatabaseModule {}
