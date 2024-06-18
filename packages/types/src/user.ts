@@ -1,5 +1,9 @@
+import { Profile } from "./profile";
+
 export interface User {
   id: string;
+  profileId?: string;
+  profile?: Profile;
   discordId: string;
   discordUsername: string;
   discordDiscriminator?: string;
@@ -30,4 +34,9 @@ export type CreateUserDto = Partial<
 
 export type UpdateUserDto = Partial<
   Omit<User, "id" | "createdAt" | "updatedAt">
+>;
+
+export type SanitizedUser = Omit<
+  User,
+  "discordAccessToken" | "discordRefreshToken" | "discordTokenExpiration"
 >;

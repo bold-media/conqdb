@@ -1,4 +1,4 @@
-import { sql } from 'drizzle-orm';
+import { relations, sql } from 'drizzle-orm';
 import {
   boolean,
   json,
@@ -8,6 +8,7 @@ import {
 } from 'drizzle-orm/pg-core';
 import { sonyflakeId } from '../custom-types/sonyflakeId';
 import { generateSonyflakeId } from '@app/utils/sonyflake';
+import { profile } from './profile.schema';
 
 export enum UserRole {
   MANAGER = 'manager',
@@ -24,9 +25,9 @@ export const user = pgTable('user', {
   id: sonyflakeId('id')
     .$default(() => generateSonyflakeId())
     .primaryKey(),
-  // profileId: bigint('profile_id', { mode: 'bigint' })
-  //     .unique()
-  //     .references(() => profile.id)
+  profileId: sonyflakeId('profile_id')
+    .unique()
+    .references(() => profile.id),
   discordId: varchar('discord_id', { length: 256 }),
   discordUsername: varchar('discord_username', { length: 256 }),
   discordDiscriminator: varchar('discord_discriminator', { length: 256 }),
@@ -42,7 +43,11 @@ export const user = pgTable('user', {
   updatedAt: timestamp('updated_at', { mode: 'date' }).$onUpdate(
     () => new Date(),
   ),
-  // .$onUpdate(
-  //   () => sql`CURRENT_TIMESTAMP`,
-  // ),
 });
+
+export const userRelations = relations(user, ({ one }) => ({
+  profile: one(profile, {
+    fields: [user.profileId],
+    references: [profile.id],
+  }),
+}));

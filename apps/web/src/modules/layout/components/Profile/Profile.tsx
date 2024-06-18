@@ -2,22 +2,28 @@
 import React from "react";
 import { useAuthMe } from "@/modules/auth/hooks/useAuthMe";
 import { Avatar, Menu, UnstyledButton } from "@mantine/core";
-import { IconBell, IconLogout, IconUserCircle } from "@tabler/icons-react";
+import {
+  IconBell,
+  IconLogout,
+  IconTableOptions,
+  IconUser,
+  IconUserCircle,
+  IconUserPlus,
+} from "@tabler/icons-react";
 import { Icon } from "@/modules/common/components/Icon";
 import { useLogout } from "@/modules/auth/hooks/useLogout";
+import { Link } from "@/navigation";
 
 export const Profile = () => {
   const { data: user } = useAuthMe();
   const { mutate: logout } = useLogout();
-
-  console.log(`user: ${JSON.stringify(user)}`);
 
   if (!user) {
     return null;
   }
 
   return (
-    <Menu>
+    <Menu trigger="click-hover">
       <Menu.Target>
         <UnstyledButton
           style={{ borderRadius: "50%" }}
@@ -44,6 +50,32 @@ export const Profile = () => {
         <Menu.Item leftSection={<Icon icon={IconBell} size={16} />}>
           Notifications
         </Menu.Item>
+        {user?.profile?.slug ? (
+          <Menu.Item
+            component={Link}
+            href={`/profile/${user?.profile?.slug}`}
+            leftSection={<Icon icon={IconUser} size={16} />}
+          >
+            Profile
+          </Menu.Item>
+        ) : (
+          <Menu.Item
+            component={Link}
+            href="/profile/create"
+            leftSection={<Icon icon={IconUserPlus} size={16} />}
+          >
+            Create Profile
+          </Menu.Item>
+        )}
+        {user?.isAdmin ? (
+          <Menu.Item
+            component={Link}
+            href="/admin"
+            leftSection={<Icon icon={IconTableOptions} size={16} />}
+          >
+            Admin Dashboard
+          </Menu.Item>
+        ) : undefined}
         <Menu.Divider />
         <Menu.Item
           leftSection={<Icon icon={IconLogout} size={16} />}

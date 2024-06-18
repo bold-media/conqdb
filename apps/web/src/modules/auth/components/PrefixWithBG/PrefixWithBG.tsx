@@ -28,7 +28,7 @@ export const PrefixWithBG: React.FC<PrefixWithBGProps> = ({ children }) => {
         muted
         loop
       >
-        <source src="/videos/knightfall-trailer.mp4" type="video/mp4" />
+        <source src="/videos/knightfall.mp4" type="video/mp4" />
       </Box>
       <Container size="xs" mt={rem(42)}>
         <Stack align="center" mb="xl">
@@ -37,7 +37,7 @@ export const PrefixWithBG: React.FC<PrefixWithBGProps> = ({ children }) => {
           <Group>
             <Group gap={rem(7)} justify="center">
               <ThemeIcon variant="light" color="blue" size="xs">
-                <Icon icon={IconCheck} />
+                <Icon icon={IconCheck} size="md" strokeWidth={2} />
               </ThemeIcon>
               <Text size="xs" tt="uppercase" fw={500} lh={1}>
                 TW Raid Manager
@@ -46,7 +46,7 @@ export const PrefixWithBG: React.FC<PrefixWithBGProps> = ({ children }) => {
             <Divider orientation="vertical" />
             <Group gap={rem(7)} justify="center">
               <ThemeIcon variant="light" color="blue" size="xs">
-                <Icon icon={IconCheck} />
+                <Icon icon={IconCheck} size="md" strokeWidth={2} />
               </ThemeIcon>
               <Text size="xs" tt="uppercase" fw={500} lh={1}>
                 Exclusive Features

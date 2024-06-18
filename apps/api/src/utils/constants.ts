@@ -4,6 +4,7 @@ export enum ROUTES {
   SESSION = 'session',
   USER = 'user',
   PROFILE = 'profile',
+  TRANSLATIONS = 'translations',
 }
 
 export enum SERVICES {
@@ -13,6 +14,7 @@ export enum SERVICES {
   SESSION = 'SESSION_SERVICE',
   USER = 'USER_SERVICE',
   PROFILE = 'PROFILE_SERVICE',
+  TRANSLATIONS = 'TRANSLATIONS_SERVICE',
 }
 
 export enum CACHE_KEYS {
@@ -20,3 +22,9 @@ export enum CACHE_KEYS {
   API_KEY = 'api-key',
   USER = 'user',
 }
+
+export enum HEADERS {
+  API_KEY = 'x-api-key',
+}
+
+export const locales = ['en', 'ar', 'cz', 'de', 'pl', 'ru', 'tr'] as const;

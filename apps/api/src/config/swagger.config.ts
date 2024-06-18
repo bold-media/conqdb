@@ -9,5 +9,5 @@ export const swaggerConfig = new DocumentBuilder()
     ROUTES.CACHE.toUpperCase(),
     'Utilities for debugging the redis cache layer.',
   )
-  .addApiKey({ type: 'apiKey' }, 'x-api-key')
+  .addApiKey({ type: 'apiKey', in: 'header' }, 'x-api-key')
   .build();

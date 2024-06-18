@@ -4,6 +4,7 @@ export const cssVariablesResolver: CSSVariablesResolver = (theme) => ({
   variables: {},
 
   light: {
+    "--menu-item-hover": `var(--mantine-color-gray-alpha-2)`,
     // "--mantine-color-text": `var(--mantine-color-dark-7)`,
     // "--mantine-color-red-text": `var(--mantine-color-red-8)`,
     // "--mantine-color-green-text": `var(--mantine-color-green-8)`,
@@ -29,6 +30,9 @@ export const cssVariablesResolver: CSSVariablesResolver = (theme) => ({
     // "--mono-subtle-hover": `var(--mantine-color-dark-alpha-1)`,
     // "--mono-subtle-color": `var(--mantine-color-dark-11)`,
     // "--subtle-hover": `var(--mantine-color-dark-alpha-1)`,
+
+    "--mantine-color-blue-light": `var(--mantine-color-blue-alpha-3)`,
+    "--mantine-color-blue-light-color": "var(--mantine-color-blue-10)",
 
     "--mantine-color-red-light": `var(--mantine-color-red-alpha-3)`,
     "--mantine-color-red-light-color": "var(--mantine-color-red-10)",
@@ -122,6 +126,9 @@ export const cssVariablesResolver: CSSVariablesResolver = (theme) => ({
     "--mantine-color-blue-alpha-9": "#3b9eff",
     "--mantine-color-blue-alpha-10": "#70b8ff",
     "--mantine-color-blue-alpha-11": "#c2e6ff",
+
+    "--mantine-color-blue-light": `var(--mantine-color-blue-alpha-2)`,
+    "--mantine-color-blue-light-color": "var(--mantine-color-blue-11)",
 
     "--mantine-color-green-0": "#0e1512",
     "--mantine-color-green-1": "#121b17",

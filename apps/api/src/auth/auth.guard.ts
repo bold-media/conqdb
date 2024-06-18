@@ -6,16 +6,18 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { SERVICES } from '@app/utils/constants';
+import { HEADERS, SERVICES } from '@app/utils/constants';
 import { AuthService } from './auth.service';
 import { SESSION_COOKIE_NAME } from './constants';
 import { IS_PUBLIC_KEY } from './decorators/public.decorator';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
     private readonly reflector: Reflector,
     @Inject(SERVICES.AUTH) private readonly authService: AuthService,
+    private readonly configService: ConfigService,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -25,8 +27,18 @@ export class AuthGuard implements CanActivate {
     ]);
 
     const request = context.switchToHttp().getRequest();
-    const apiKey = request.headers['x-api-key'];
+    const apiKey = request.headers[HEADERS.API_KEY];
+
     const sessionId = request.cookies[SESSION_COOKIE_NAME];
+
+    if (apiKey && apiKey === this.configService.get('ADMIN_API_KEY')) {
+      request.user = {
+        id: 'admin',
+        isAdmin: true,
+        apiKey,
+      };
+      return true;
+    }
 
     if (sessionId) {
       const user = await this.authService.validateSession(sessionId);

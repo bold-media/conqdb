@@ -69,6 +69,9 @@ export class UserService implements IUserInterface {
 
     const user = await this.db.query.user.findFirst({
       where: eq(userSchema.id, userId),
+      with: {
+        profile: true,
+      },
     });
 
     if (user) {

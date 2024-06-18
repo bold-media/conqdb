@@ -16,6 +16,7 @@ import * as Joi from 'joi';
         MACHINE_ID: Joi.number().default(1),
         PORT: Joi.number().port().default(8000),
         COOKIE_SECRET: Joi.string().required(),
+        ADMIN_API_KEY: Joi.string(),
         POSTGRES_URL: Joi.string().required(),
         REDIS_HOST: Joi.string().required(),
         REDIS_PORT: Joi.number().port().default(6379),

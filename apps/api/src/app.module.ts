@@ -7,13 +7,23 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth/auth.guard';
+import { PermissionsGuard } from './auth/permissions.guard';
+import { TranslationsModule } from './translations/translations.module';
 
 @Module({
-  imports: [ConfigModule, CacheModule, DatabaseModule, AuthModule, UserModule],
+  imports: [
+    ConfigModule,
+    CacheModule,
+    DatabaseModule,
+    AuthModule,
+    UserModule,
+    TranslationsModule,
+  ],
   controllers: [],
   providers: [
     AppService,
     { provide: APP_GUARD, scope: Scope.REQUEST, useClass: AuthGuard },
+    { provide: APP_GUARD, scope: Scope.REQUEST, useClass: PermissionsGuard },
   ],
 })
 export class AppModule {}

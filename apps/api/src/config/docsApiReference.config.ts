@@ -12,6 +12,15 @@ export const docsApiReference = (
     spec: {
       content: document,
     },
+    authentication: {
+      customSecurity: true,
+      apiKey: {
+        token:
+          process.env.NODE_ENV === 'development'
+            ? process.env.ADMIN_API_KEY
+            : null,
+      },
+    },
     withFastify: true,
     theme: 'default',
     layout: 'modern',

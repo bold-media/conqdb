@@ -30,7 +30,6 @@ export class CacheController {
     @Inject(SERVICES.CACHE) private readonly cacheService: CacheService,
   ) {}
 
-  @Public()
   @Get()
   @ApiOperation({
     summary: 'Get All Cache Keys',
@@ -112,7 +111,6 @@ export class CacheController {
     };
   }
 
-  @Public()
   @Get('/reset')
   @ApiOperation({ summary: 'Reset Cache' })
   @ApiResponse({

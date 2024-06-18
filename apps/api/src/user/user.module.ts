@@ -1,4 +1,3 @@
-import { DatabaseModule } from '@app/database/database.module';
 import { SERVICES } from '@app/utils/constants';
 import { Module } from '@nestjs/common';
 import { UserService } from './user.service';

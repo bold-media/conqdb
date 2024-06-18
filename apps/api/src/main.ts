@@ -15,6 +15,7 @@ import { docsApiReference } from './config/docsApiReference.config';
 import { swaggerConfig } from './config/swagger.config';
 import { fastifyCookie } from '@fastify/cookie';
 import { fastifyCors } from '@fastify/cors';
+import { HEADERS } from './utils/constants';
 
 async function migrateDatabase(databaseUrl: string) {
   const client = postgres(databaseUrl, { max: 1, onnotice: () => {} });
@@ -47,13 +48,21 @@ async function bootstrap() {
 
   await app.register(fastifyCors, {
     origin: configService.get('FRONTEND_URL'),
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', HEADERS.API_KEY],
     credentials: true,
   });
 
   await migrateDatabase(configService.get<string>('POSTGRES_URL'));
 
   const apiDocument = SwaggerModule.createDocument(app, swaggerConfig);
+
+  const setupApiDocument = SwaggerModule.setup('docs', app, apiDocument, {
+    swaggerOptions: {
+      persistAuthorization: true,
+      tagsSorter: 'alpha',
+      operationsSorter: 'alpha',
+    },
+  });
 
   app.use('/docs', docsApiReference(apiDocument));
 

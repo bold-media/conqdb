@@ -8,27 +8,29 @@ export default createMiddleware({
 });
 
 export const config = {
-  // matcher: [
-  //   /*
-  //    * Match all request paths except for the ones starting with:
-  //    * - api (API routes)
-  //    * - _next/static (static files)
-  //    * - _next/image (image optimization files)
-  //    * - favicon.ico (favicon file)
-  //    */
-  //   "/((?!api|_next/static|_next/image|favicon.ico).*)",
-  // ],
-  // matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
   matcher: [
     /*
      * Match all request paths except for the ones starting with:
      * - api (API routes)
      * - _next/static (static files)
      * - _next/image (image optimization files)
-     * - _vercel (Vercel files)
      * - favicon.ico (favicon file)
-     * - public directory files (match any file extension)
+     * - .mp4 (video files)
      */
-    "/((?!api|_next/static|_next/image|_vercel|favicon.ico|.*\\..*).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.mp4).*)",
   ],
+  // matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
+  // matcher: [
+  //   /*
+  //    * Match all request paths except for the ones starting with:
+  //    * - api (API routes)
+  //    * - _next/static (static files)
+  //    * - _next/image (image optimization files)
+  //    * - _vercel (Vercel files)
+  //    * - favicon.ico (favicon file)
+  //    * - public directory files (match any file extension)
+  //    */
+  //   "/((?!api|_next/static|_next/image|_vercel|favicon.ico|.*\\..*).*)",
+  // ],
+  // matcher: ["/", "/(ar|cz|de|en|pl|ru|tr)/:path*"],
 };

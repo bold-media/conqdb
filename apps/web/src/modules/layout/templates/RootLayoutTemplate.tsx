@@ -1,10 +1,9 @@
 "use client";
 import React from "react";
-import { AppShell, MantineProvider } from "@mantine/core";
+import { MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Header } from "@/modules/layout/components/Header";
 import { theme } from "@/styles/theme";
 import { cssVariablesResolver } from "@/styles/cssVariablesResolver";
 
@@ -32,14 +31,7 @@ export const RootLayoutTemplate: React.FC<RootLayoutTemplateProps> = ({
         defaultColorScheme="auto"
       >
         <Notifications />
-        <AppShell
-          header={{
-            height: { base: 60, md: 72 },
-          }}
-        >
-          <Header />
-          {children}
-        </AppShell>
+        {children}
       </MantineProvider>
     </QueryClientProvider>
   );

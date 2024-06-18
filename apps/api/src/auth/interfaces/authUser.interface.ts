@@ -7,14 +7,12 @@ export type AuthUser = InferredUser & {} & (
     | { session?: never; apiKey: InferredApiKey }
   );
 
-export type UserWithSession = {
-  user: InferredUser;
+export type UserWithSession = InferredUser & {
   session: InferredSession;
   apiKey?: never;
 };
 
-export type UserWithApiKey = {
-  user: InferredUser;
+export type UserWithApiKey = InferredUser & {
   session?: never;
   apiKey: InferredApiKey;
 };
