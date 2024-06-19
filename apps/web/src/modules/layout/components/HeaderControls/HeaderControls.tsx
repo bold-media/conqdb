@@ -10,8 +10,8 @@ export const HeaderControls = () => {
     <Group align="center" justify="center" gap={rem(12)}>
       <LoginLink label="Sign In" />
       <TooltipGroup openDelay={572} closeDelay={142}>
-        <LanguageSwitcher label="Switch Language" />
-        <ThemeSwitcher label="Toggle Color Scheme" />
+        <LanguageSwitcher label="Switch Language" visibleFrom="md" />
+        <ThemeSwitcher label="Toggle Color Scheme" visibleFrom="md" />
       </TooltipGroup>
       <Profile />
     </Group>

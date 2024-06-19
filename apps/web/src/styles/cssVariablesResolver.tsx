@@ -4,12 +4,14 @@ export const cssVariablesResolver: CSSVariablesResolver = (theme) => ({
   variables: {},
 
   light: {
-    "--menu-item-hover": `var(--mantine-color-gray-alpha-2)`,
-    // "--mantine-color-text": `var(--mantine-color-dark-7)`,
+    // "--menu-item-hover": `var(--mantine-color-gray-alpha-2)`,
+    "--menu-item-hover": `var(--mantine-color-gray-alpha-1)`,
+    "--mantine-color-body": `var(--mantine-color-gray-1)`,
+    "--mantine-color-text": `var(--mantine-color-dark-7)`,
     // "--mantine-color-red-text": `var(--mantine-color-red-8)`,
     // "--mantine-color-green-text": `var(--mantine-color-green-8)`,
     // "--mantine-color-body": `var(--mantine-color-gray-0)`,
-    // "--mantine-color-dimmed": `var(--mantine-color-dark-2)`,
+    "--mantine-color-dimmed": `var(--mantine-color-gray-8)`,
     // "--mantine-color-error": `var(--mantine-color-red-8)`,
     // "--mantine-color-placeholder": `var(--mantine-color-gray-8)`,
     // "--mantine-color-anchor": `var(--mantine-color-blue-8)`,
@@ -39,11 +41,10 @@ export const cssVariablesResolver: CSSVariablesResolver = (theme) => ({
   },
 
   dark: {
-    "--app-shell-border-color": "red",
     "--mantine-color-text": `var(--mantine-color-dark-0)`,
     "--mantine-color-red-text": `var(--mantine-color-red-8)`,
     "--mantine-color-green-text": `var(--mantine-color-green-8)`,
-    "--mantine-color-body": `var(--mantine-color-dark-11)`,
+    "--mantine-color-body": `var(--mantine-color-dark-10)`,
     "--mantine-color-dimmed": `var(--mantine-color-dark-2)`,
     "--mantine-color-error": `var(--mantine-color-red-8)`,
     "--mantine-color-placeholder": `var(--mantine-color-dark-2)`,

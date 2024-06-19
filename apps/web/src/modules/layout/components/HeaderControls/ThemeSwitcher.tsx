@@ -4,13 +4,23 @@ import React from "react";
 import { HeaderControl } from "./HeaderControl";
 import {
   Box,
+  BoxProps,
   rem,
   useComputedColorScheme,
   useMantineColorScheme,
 } from "@mantine/core";
 import { IconSun, IconMoon } from "@tabler/icons-react";
 
-export const ThemeSwitcher = ({ label }: { label: string }) => {
+interface ThemeSwitcherProps extends BoxProps {
+  label: string;
+  tooltip?: boolean;
+}
+
+export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
+  label,
+  tooltip = true,
+  ...rest
+}) => {
   const { setColorScheme } = useMantineColorScheme();
   const computedColorScheme = useComputedColorScheme("light", {
     getInitialValueInEffect: true,
@@ -22,6 +32,8 @@ export const ThemeSwitcher = ({ label }: { label: string }) => {
         setColorScheme(computedColorScheme === "light" ? "dark" : "light")
       }
       tooltip={label}
+      disabled={!tooltip}
+      {...rest}
     >
       <Box
         component={IconSun}

@@ -332,6 +332,9 @@ importers:
       '@tanstack/eslint-plugin-query':
         specifier: ^5.43.1
         version: 5.43.1(eslint@8.57.0)(typescript@5.3.3)
+      '@types/css-modules':
+        specifier: ^1.0.5
+        version: 1.0.5
       '@types/eslint':
         specifier: ^8.56.5
         version: 8.56.5
@@ -6420,6 +6423,10 @@ packages:
 
   /@types/cookiejar@2.1.5:
     resolution: {integrity: sha512-he+DHOWReW0nghN24E1WUqM0efK4kI9oTqDm6XmK8ZPe2djZ90BSNdGnIyCLzCPw7/pogPlGbzI2wHGGmi4O/Q==}
+    dev: true
+
+  /@types/css-modules@1.0.5:
+    resolution: {integrity: sha512-oeKafs/df9lwOvtfiXVliZsocFVOexK9PZtLQWuPeuVCFR7jwiqlg60lu80JTe5NFNtH3tnV6Fs/ySR8BUPHAw==}
     dev: true
 
   /@types/d3-array@3.2.1:

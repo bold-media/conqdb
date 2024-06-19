@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, Text } from "@mantine/core";
+import { BoxProps, Menu, Text } from "@mantine/core";
 import React from "react";
 import { HeaderControl } from "./HeaderControl";
 import { useLocale } from "next-intl";
@@ -11,7 +11,16 @@ import classes from "./LanguageSwitcher.module.css";
 import ReactCountryFlag from "react-country-flag";
 import { getDirFromLocale } from "../../utils/getDirFromLocale";
 
-export const LanguageSwitcher = ({ label }: { label: string }) => {
+interface LanguageSwitcherProps extends BoxProps {
+  label: string;
+  tooltip?: boolean;
+}
+
+export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
+  label,
+  tooltip = true,
+  ...rest
+}) => {
   const router = useRouter();
   const pathname = usePathname();
   const locale = useLocale();
@@ -21,7 +30,7 @@ export const LanguageSwitcher = ({ label }: { label: string }) => {
 
   return (
     <Menu opened={opened} onChange={toggle} position="bottom" withArrow>
-      <HeaderControl tooltip={label} disabled={opened}>
+      <HeaderControl tooltip={label} disabled={opened || !tooltip} {...rest}>
         <Menu.Target>
           <Text size="xs" className={classes.key}>
             <ReactCountryFlag
