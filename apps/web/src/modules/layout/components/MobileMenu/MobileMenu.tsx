@@ -48,19 +48,18 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
             <Stack gap={0}>
               {headerMenu?.map((item) => {
                 return (
-                  <>
+                  <React.Fragment key={item.labelKey}>
                     {item?.children ? (
                       <MobileMenuItemWithChildren
-                        key={item.labelKey}
                         item={item}
                         openedLink={openedLink}
                         setOpenedLink={setOpenedLink}
                       />
                     ) : (
-                      <MobileMenuItem key={item.labelKey} item={item} />
+                      <MobileMenuItem item={item} />
                     )}
                     <Divider />
-                  </>
+                  </React.Fragment>
                 );
               })}
             </Stack>

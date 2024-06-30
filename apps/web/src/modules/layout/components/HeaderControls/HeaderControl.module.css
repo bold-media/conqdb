@@ -10,10 +10,10 @@
   background-color: var(--mantine-color-gray-1);
 
   @mixin dark {
-    background-color: var(--mantine-color-dark-11);
+    background-color: var(--mantine-color-dark-10);
   }
 
   @mixin hover {
-    background-color: var(--subtle-hover);
+    background-color: var(--menu-item-hover);
   }
 }

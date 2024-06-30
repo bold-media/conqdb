@@ -5,7 +5,9 @@ interface BaseAppShellProps extends AppShellProps {}
 
 export const AppShell: React.FC<BaseAppShellProps> = ({
   children,
-  header = { height: { base: 60, md: 72 } },
+  header = {
+    height: { base: 60, md: 72 },
+  },
   ...props
 }) => {
   return (

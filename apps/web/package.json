@@ -40,7 +40,8 @@
     "react-dom": "^18.3.1",
     "recharts": "2",
     "server-only": "^0.0.1",
-    "standard-slugify": "^4.0.0"
+    "standard-slugify": "^4.0.0",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.1.1",

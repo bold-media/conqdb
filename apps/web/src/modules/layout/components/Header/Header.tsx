@@ -16,7 +16,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ burgerProps, children }) => {
   return (
-    <AppShellHeader px="md">
+    <AppShellHeader px="md" zIndex={150}>
       <Group align="center" justify="space-between" h="100%">
         <Group>
           {burgerProps ? <Burger {...burgerProps} /> : undefined}
